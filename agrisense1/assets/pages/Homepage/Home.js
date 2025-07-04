@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
@@ -47,75 +48,87 @@ export default function Home({ navigation }) {
   ];
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
+    <SafeAreaView style={styles.wrapper}>
+      {/* Sticky Header */}
+      <View style={styles.stickyHeader}>
         <Image source={require('../../images/logo.png')} style={styles.logo} />
         <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
           <Ionicons name="notifications-outline" size={28} color="#2E7D32" />
         </TouchableOpacity>
       </View>
 
-      {/* Chart */}
-      <Text style={styles.sectionTitle}>Plant Vital Stats</Text>
-      <LineChart
-        data={chartData}
-        width={screenWidth - 40}
-        height={220}
-        chartConfig={chartConfig}
-        style={styles.chart}
-      />
+      {/* Scrollable content */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.sectionTitle}>Plant Vital Stats</Text>
+        <LineChart
+          data={chartData}
+          width={screenWidth - 40}
+          height={220}
+          chartConfig={chartConfig}
+          style={styles.chart}
+        />
 
-      {/* Soil Health Status */}
-      <Text style={styles.sectionTitle}>Soil Health Status</Text>
-      {healthData.map((item, index) => (
-        <View key={index} style={styles.healthBox}>
-          <Text style={styles.healthLabel}>{item.label}</Text>
-          <View style={[styles.statusBadge, { backgroundColor: item.color }]}>
-            <Text style={styles.statusValue}>{item.value}</Text>
-            <Text style={styles.statusText}>{item.status}</Text>
+        <Text style={styles.sectionTitle}>Soil Health Status</Text>
+        {healthData.map((item, index) => (
+          <View key={index} style={styles.healthBox}>
+            <Text style={styles.healthLabel}>{item.label}</Text>
+            <View style={[styles.statusBadge, { backgroundColor: item.color }]}>
+              <Text style={styles.statusValue}>{item.value}</Text>
+              <Text style={styles.statusText}>{item.status}</Text>
+            </View>
           </View>
-        </View>
-      ))}
+        ))}
+      </ScrollView>
 
-      {/* Bottom Nav Buttons */}
-            <View style={styles.bottomNav}>
+      {/* Sticky Bottom Nav */}
+      <View style={styles.bottomNav}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Ionicons name="home" size={26} color="#2E7D32" />
+          <Ionicons name="home" size={26} color="#2E7D32" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Map')}>
-            <Ionicons name="location-outline" size={26} color="#2E7D32" />
+          <Ionicons name="location-outline" size={26} color="#2E7D32" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('SoilLog')}>
-            <Ionicons name="time-outline" size={26} color="#2E7D32" />
+          <Ionicons name="time-outline" size={26} color="#2E7D32" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Guide')}>
-            <Ionicons name="book-outline" size={26} color="#2E7D32" />
+          <Ionicons name="book-outline" size={26} color="#2E7D32" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-            <Ionicons name="person-outline" size={26} color="#2E7D32" />
+          <Ionicons name="person-outline" size={26} color="#2E7D32" />
         </TouchableOpacity>
-        </View>
-    </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    paddingBottom: 60,
+  wrapper: {
+    flex: 1,
     backgroundColor: '#F1F8E9',
   },
-  header: {
+  stickyHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    backgroundColor: '#F1F8E9',
+    padding: 20,
+    paddingTop: 10,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
   },
   logo: {
     width: 40,
     height: 40,
     resizeMode: 'contain',
+  },
+  scrollContent: {
+    paddingTop: 80, // space for sticky header
+    paddingBottom: 100, // space for sticky bottom nav
+    paddingHorizontal: 20,
   },
   sectionTitle: {
     fontSize: 18,
@@ -157,8 +170,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#C5E1A5',
-    padding: 10,
-    borderRadius: 16,
-    marginTop: 20,
+    padding: 19,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });

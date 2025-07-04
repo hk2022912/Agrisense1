@@ -20,6 +20,19 @@ export default function SoilGuideList() {
   const handleGoBack = () => navigation.goBack();
   const handleNavigate = (screen) => navigation.navigate(screen);
 
+  const guides = [
+    { id: 1, title: 'Basic Soil Guide', desc: 'A Soil guide for Farmers', img: require('../../images/soil_basic.png') },
+    { id: 2, title: 'Soil Guide 2', desc: 'Placeholder for Soil Guide 2', img: require('../../images/soil_fertility.png') },
+    { id: 3, title: 'Soil Guide 3', desc: 'Placeholder for Soil Guide 3', img: require('../../images/soil_erosion.png') },
+    { id: 4, title: 'Soil Guide 4', desc: 'Placeholder for Soil Guide 4', img: require('../../images/soil_basic.png') },
+    { id: 5, title: 'Soil Guide 5', desc: 'Placeholder for Soil Guide 5', img: require('../../images/soil_fertility.png') },
+    { id: 6, title: 'Soil Guide 6', desc: 'Placeholder for Soil Guide 6', img: require('../../images/soil_erosion.png') },
+    { id: 7, title: 'Soil Guide 7', desc: 'Placeholder for Soil Guide 7', img: require('../../images/soil_basic.png') },
+    { id: 8, title: 'Soil Guide 8', desc: 'Placeholder for Soil Guide 8', img: require('../../images/soil_fertility.png') },
+    { id: 9, title: 'Soil Guide 9', desc: 'Placeholder for Soil Guide 9', img: require('../../images/soil_erosion.png') },
+    { id: 10, title: 'Soil Guide 10', desc: 'Placeholder for Soil Guide 10', img: require('../../images/soil_basic.png') },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#E3FFCE" />
@@ -38,71 +51,24 @@ export default function SoilGuideList() {
           />
         </View>
 
-        {/* Guide Cards */}
+        {/* Cards */}
         <View style={styles.cardList}>
-          {/* Card 1 - Basic Soil Guide */}
-          <View style={styles.card}>
-            <Image
-              source={require('../../images/soil_basic.png')}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>Basic Soil Guide:</Text>
-              <Text style={styles.cardDescription}>A Soil guide for Farmers</Text>
-              <TouchableOpacity
-                style={styles.startButton}
-                onPress={() => handleNavigate('BasicSoilGuide')}
-              >
-                <Text style={styles.startText}>Let's start</Text>
-                <Ionicons name="arrow-forward" size={16} color="#4A6B3E" style={{ marginLeft: 6 }} />
-              </TouchableOpacity>
+          {guides.map((guide) => (
+            <View key={guide.id} style={styles.card}>
+              <Image source={guide.img} style={styles.cardImage} resizeMode="cover" />
+              <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>{guide.title}</Text>
+                <Text style={styles.cardDescription}>{guide.desc}</Text>
+                <TouchableOpacity
+                  style={styles.startButton}
+                  onPress={() => handleNavigate(`SoilGuide${guide.id}`)}
+                >
+                  <Text style={styles.startText}>Let's start</Text>
+                  <Ionicons name="arrow-forward" size={16} color="#4A6B3E" style={{ marginLeft: 6 }} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-
-          {/* Card 2 - Improving Soil Fertility */}
-          <View style={styles.card}>
-            <Image
-              source={require('../../images/soil_fertility.png')}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>Improving Soil Fertility:</Text>
-              <Text style={styles.cardDescription}>
-                Ways to enrich poor soil using compost, manure, cover crops, etc.
-              </Text>
-              <TouchableOpacity
-                style={styles.startButton}
-                onPress={() => handleNavigate('FertilityGuide')}
-              >
-                <Text style={styles.startText}>Let's start</Text>
-                <Ionicons name="arrow-forward" size={16} color="#4A6B3E" style={{ marginLeft: 6 }} />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Card 3 - Preventing Soil Erosion */}
-          <View style={styles.card}>
-            <Image
-              source={require('../../images/soil_erosion.png')}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>Preventing Soil Erosion</Text>
-              <Text style={styles.cardDescription}>
-                Using mulching, contour planting, and vegetative barriers.
-              </Text>
-              <TouchableOpacity
-                style={styles.startButton}
-                onPress={() => handleNavigate('ErosionGuide')}
-              >
-                <Text style={styles.startText}>Let's start</Text>
-                <Ionicons name="arrow-forward" size={16} color="#4A6B3E" style={{ marginLeft: 6 }} />
-              </TouchableOpacity>
-            </View>
-          </View>
+          ))}
         </View>
 
       </ScrollView>

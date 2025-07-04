@@ -1,84 +1,87 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
   const navigation = useNavigation();
 
-  const handleGoBack = () => navigation.goBack();
+  const handleBackPress = () => {
+    navigation.navigate("Home");
+  };
 
-  const handleNavigate = (screen) => {
-    navigation.navigate(screen); // Replace with your actual screen names
+  const handleMenuPress = (screen) => {
+    navigation.navigate(screen);
+  };
+
+  const handleLogout = () => {
+    navigation.navigate("Option");
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#E3FFCE" />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <StatusBar barStyle="light-content" backgroundColor="#7CB342" />
 
-        {/* Top Oval Background */}
-        <View style={styles.topOvalContainer}>
-          <Image
-            source={require('../../images/background_top_oval.png')}
-            style={styles.topOval}
-            resizeMode="cover"
-          />
-          <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
-            <Ionicons name="arrow-back" size={20} color="#fff" />
-          </TouchableOpacity>
-          <Text style={styles.brand}>AGRISENSE</Text>
-          <Text style={styles.profileText}>MY PROFILE →</Text>
-        </View>
-
-        {/* Profile Details */}
-        <View style={styles.profileInfo}>
-          <Text style={styles.name}>HK BUTLAY</Text>
-          <Text style={styles.email}>hkbutlay@gmail.com</Text>
-        </View>
-
-        {/* Options */}
-        <View style={styles.optionsContainer}>
-          <TouchableOpacity
-            style={styles.optionButton}
-            onPress={() => handleNavigate('AboutScreen')}
-          >
-            <Text style={styles.optionText}>About</Text>
-            <Ionicons name="chevron-forward" size={20} color="#fff" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.optionButton}
-            onPress={() => handleNavigate('FAQScreen')}
-          >
-            <Text style={styles.optionText}>FAQ</Text>
-            <Ionicons name="chevron-forward" size={20} color="#fff" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.optionButton}
-            onPress={() => handleNavigate('SupportScreen')}
-          >
-            <Text style={styles.optionText}>Contact Support</Text>
-            <Ionicons name="chevron-forward" size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
-
-        {/* Logout */}
-        <TouchableOpacity style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Log out</Text>
+      {/* Header Section */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+          <Ionicons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
 
-      </ScrollView>
+        <View style={styles.headerContent}>
+          <Text style={styles.brandText}>AGRISENSE</Text>
+          <Text style={styles.profileText}>MY PROFILE</Text>
+          <View style={styles.underline} />
+        </View>
+      </View>
+
+      {/* Content Section */}
+      <View style={styles.contentContainer}>
+        {/* User Info */}
+        <View style={styles.userInfo}>
+          <Text style={styles.userName}>HK BUTLAY</Text>
+          <Text style={styles.userEmail}>hkbutlay@gmail.com</Text>
+        </View>
+
+        {/* Menu Items */}
+        <View style={styles.menuContainer}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => handleMenuPress("AboutScreen")}
+          >
+            <Text style={styles.menuText}>About</Text>
+            <Ionicons name="chevron-forward" size={20} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => handleMenuPress("FAQScreen")}
+          >
+            <Text style={styles.menuText}>FAQ</Text>
+            <Ionicons name="chevron-forward" size={20} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => handleMenuPress("SupportScreen")}
+          >
+            <Text style={styles.menuText}>Contact Support</Text>
+            <Ionicons name="chevron-forward" size={20} color="white" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Logout Button */}
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Log out</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -86,101 +89,116 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E3FFCE',
+    backgroundColor: "#E8F5E8",
   },
-  scrollContainer: {
-    paddingBottom: 20,
-  },
-  topOvalContainer: {
-    alignItems: 'center',
-    position: 'relative',
-  },
-  topOval: {
-    width: '100%',
-    height: 160,
+  headerContainer: {
+    backgroundColor: "#7CB342",
+    paddingTop: 20,
+    paddingBottom: 60,
+    borderBottomLeftRadius: 150,
+    borderBottomRightRadius: 150,
+    position: "relative",
   },
   backButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     left: 20,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: '#4A6B3E',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 1,
   },
-  brand: {
-    position: 'absolute',
-    top: 50,
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#fff',
-    letterSpacing: 1,
+  headerContent: {
+    alignItems: "center",
+    paddingTop: 40,
+  },
+  brandText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "white",
+    letterSpacing: 2,
+    marginBottom: 8,
   },
   profileText: {
-    position: 'absolute',
-    top: 75,
-    fontSize: 12,
-    color: '#fff',
-    fontWeight: '300',
-  },
-  profileInfo: {
-    alignItems: 'center',
-    marginTop: 30,
-  },
-  name: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#1D1D1D',
-  },
-  email: {
-    fontSize: 14,
-    color: '#1D1D1D',
-    opacity: 0.6,
-    marginTop: 4,
-  },
-  optionsContainer: {
-    marginTop: 30,
-    paddingHorizontal: 30,
-    gap: 16,
-  },
-  optionButton: {
-    backgroundColor: '#7BBE4F',
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  optionText: {
-    color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    color: "white",
+    fontWeight: "500",
+    letterSpacing: 1,
+  },
+  underline: {
+    width: 60,
+    height: 2,
+    backgroundColor: "white",
+    marginTop: 8,
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 32,
+    paddingTop: 40,
+  },
+  userInfo: {
+    alignItems: "center",
+    marginBottom: 60,
+  },
+  userName: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#2E7D32",
+    marginBottom: 8,
+    letterSpacing: 1,
+  },
+  userEmail: {
+    fontSize: 16,
+    color: "#4A4A4A",
+    fontWeight: "400",
+  },
+  menuContainer: {
+    marginBottom: 60,
+  },
+  menuItem: {
+    backgroundColor: "#7CB342",
+    paddingVertical: 18,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  menuText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "white",
   },
   logoutButton: {
-    marginTop: 40,
-    alignSelf: 'center',
-    backgroundColor: '#4A6B3E',
-    paddingVertical: 12,
+    backgroundColor: "#5A8A3A",
+    paddingVertical: 16,
     paddingHorizontal: 40,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 4,
+    borderRadius: 25,
+    alignSelf: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   logoutText: {
-    color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
+    color: "white",
   },
 });

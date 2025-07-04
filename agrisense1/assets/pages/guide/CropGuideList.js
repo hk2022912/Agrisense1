@@ -1,5 +1,3 @@
-// assets/pages/guide/CropGuideList.js
-
 import React from 'react';
 import {
   View,
@@ -20,6 +18,79 @@ export default function CropGuideList() {
   const handleGoBack = () => navigation.goBack();
   const handleNavigate = (screen) => navigation.navigate(screen);
 
+  const guides = [
+    {
+      id: 1,
+      title: 'Crop Rotation Planning',
+      desc: 'Helps diversify crops to improve soil health and reduce pests.',
+      img: require('../../images/rotation2.png'),
+      screen: 'CropGuide1',
+    },
+    {
+      id: 2,
+      title: 'Pest and Disease Management',
+      desc: 'Gives tips on integrated pest and crop monitoring tools.',
+      img: require('../../images/pest.png'),
+      screen: 'CropGuide2',
+    },
+    {
+      id: 3,
+      title: 'Companion Planting Techniques',
+      desc: 'Crops that grow better together.',
+      img: require('../../images/companion.png'),
+      screen: 'CropGuide3',
+    },
+    {
+      id: 4,
+      title: 'Irrigation Best Practices',
+      desc: 'Efficient water use for improved crop growth.',
+      img: require('../../images/rotation2.png'),
+      screen: 'CropGuide4',
+    },
+    {
+      id: 5,
+      title: 'Seed Selection and Treatment',
+      desc: 'Choosing quality seeds for better harvest.',
+      img: require('../../images/pest.png'),
+      screen: 'CropGuide5',
+    },
+    {
+      id: 6,
+      title: 'Weed Management',
+      desc: 'Learn strategies to reduce weed impact.',
+      img: require('../../images/companion.png'),
+      screen: 'CropGuide6',
+    },
+    {
+      id: 7,
+      title: 'Fertilizer Application Timing',
+      desc: 'Optimize nutrient availability for plants.',
+      img: require('../../images/rotation2.png'),
+      screen: 'CropGuide7',
+    },
+    {
+      id: 8,
+      title: 'Harvesting Tips and Timing',
+      desc: 'Maximize yield through proper harvesting.',
+      img: require('../../images/pest.png'),
+      screen: 'CropGuide8',
+    },
+    {
+      id: 9,
+      title: 'Post-Harvest Handling',
+      desc: 'How to reduce crop loss after harvest.',
+      img: require('../../images/companion.png'),
+      screen: 'CropGuide9',
+    },
+    {
+      id: 10,
+      title: 'Climate Smart Agriculture',
+      desc: 'Adapt to climate change with resilient practices.',
+      img: require('../../images/rotation2.png'),
+      screen: 'CropGuide10',
+    },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#E3FFCE" />
@@ -38,74 +109,26 @@ export default function CropGuideList() {
           />
         </View>
 
-        {/* Guide Cards */}
+        {/* Cards */}
         <View style={styles.cardList}>
-          {/* Card 1 */}
-          <View style={styles.card}>
-            <Image
-              source={require('../../images/rotation.png')}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>Crop Rotation Planning</Text>
-              <Text style={styles.cardDescription}>
-                Helps diversify crops to improve soil health and reduce pests.
-              </Text>
-              <TouchableOpacity
-                style={styles.startButton}
-                onPress={() => handleNavigate('RotationGuide')}
-              >
-                <Text style={styles.startText}>Let's start</Text>
-                <Ionicons name="arrow-forward" size={16} color="#fff" style={{ marginLeft: 6 }} />
-              </TouchableOpacity>
+          {guides.map((guide) => (
+            <View key={guide.id} style={styles.card}>
+              <Image source={guide.img} style={styles.cardImage} resizeMode="cover" />
+              <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>{guide.title}</Text>
+                <Text style={styles.cardDescription}>{guide.desc}</Text>
+                <TouchableOpacity
+                  style={styles.startButton}
+                  onPress={() => handleNavigate(guide.screen)}
+                >
+                  <Text style={styles.startText}>Let's start</Text>
+                  <Ionicons name="arrow-forward" size={16} color="#4A6B3E" style={{ marginLeft: 6 }} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-
-          {/* Card 2 */}
-          <View style={styles.card}>
-            <Image
-              source={require('../../images/pest.png')}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>Pest and Disease Management</Text>
-              <Text style={styles.cardDescription}>
-                Gives tips on integrated pest and crop monitoring tools.
-              </Text>
-              <TouchableOpacity
-                style={styles.startButton}
-                onPress={() => handleNavigate('PestGuide')}
-              >
-                <Text style={styles.startText}>Let's start</Text>
-                <Ionicons name="arrow-forward" size={16} color="#fff" style={{ marginLeft: 6 }} />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Card 3 */}
-          <View style={styles.card}>
-            <Image
-              source={require('../../images/companion.png')}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>Companion Planting Techniques</Text>
-              <Text style={styles.cardDescription}>
-                Crops that grow better together.
-              </Text>
-              <TouchableOpacity
-                style={styles.startButton}
-                onPress={() => handleNavigate('CompanionGuide')}
-              >
-                <Text style={styles.startText}>Let's start</Text>
-                <Ionicons name="arrow-forward" size={16} color="#fff" style={{ marginLeft: 6 }} />
-              </TouchableOpacity>
-            </View>
-          </View>
+          ))}
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -148,15 +171,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: '#4A6B3E',
     borderRadius: 16,
     marginBottom: 20,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
   },
   cardImage: {
     width: '100%',
@@ -164,29 +182,30 @@ const styles = StyleSheet.create({
   },
   cardTextContainer: {
     padding: 16,
+    backgroundColor: '#4A6B3E',
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#4A6B3E',
+    color: '#fff',
     marginBottom: 6,
   },
   cardDescription: {
     fontSize: 14,
-    color: '#4A6B3E',
+    color: '#fff',
     marginBottom: 10,
   },
   startButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-end', // ← moved to the opposite side
-    backgroundColor: '#4A6B3E',
+    alignSelf: 'flex-end',
+    backgroundColor: '#fff',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 30,
   },
   startText: {
-    color: '#fff',
+    color: '#4A6B3E',
     fontSize: 14,
     fontWeight: '600',
   },
