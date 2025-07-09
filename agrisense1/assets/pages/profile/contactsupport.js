@@ -1,22 +1,25 @@
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native"; // <-- Added for navigation
 
 export default function ContactSupportPage() {
+  const navigation = useNavigation(); // <-- Hook to access navigation
+
   const handleBackPress = () => {
-    console.log("Back pressed")
-  }
+    navigation.navigate("Home"); // <-- Navigates to Home screen
+  };
 
   const handleEmailPress = () => {
-    Linking.openURL("mailto:agrisense@gmail.com")
-  }
+    Linking.openURL("mailto:agrisense@gmail.com");
+  };
 
   const handlePhonePress = () => {
-    Linking.openURL("tel:0936311790")
-  }
+    Linking.openURL("tel:0936311790");
+  };
 
   const handleFacebookPress = () => {
-    Linking.openURL("https://facebook.com/agrisense")
-  }
+    Linking.openURL("https://facebook.com/agrisense");
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,7 +64,7 @@ export default function ContactSupportPage() {
         </View>
       </View>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -155,4 +158,4 @@ const styles = StyleSheet.create({
     marginTop: 40,
     lineHeight: 22,
   },
-})
+});
