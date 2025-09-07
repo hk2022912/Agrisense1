@@ -25,10 +25,10 @@ const TRANSLATIONS = {
     tapToContinue: "Tap to continue →",
     steps: [
       { title: "Why Weed Management Matters", emoji: "🌾" },
-      { title: "Control Methods", emoji: "🛠️" },
+      { title: "Controlling Weed Methods", emoji: "🛠️" },
       { title: "Sustainable Strategies", emoji: "🌱" },
       { title: "Weed Impact on Crops", emoji: "⚠️" },
-      { title: "Beginner Action Plan", emoji: "📋" },
+      { title: "Beginner’s Action Steps", emoji: "📋" },
     ],
     stepContent: {
       importance: {
@@ -204,7 +204,7 @@ const TRANSLATIONS = {
       { title: "Mga Paraan ng Kontrol", emoji: "🛠️" },
       { title: "Sustainable na Estratehiya", emoji: "🌱" },
       { title: "Epekto ng Damo sa Pananim", emoji: "⚠️" },
-      { title: "Action Plan para sa Nagsisimula", emoji: "📋" },
+      { title: "Mga Hakbang para sa mga Nagsisimula", emoji: "📋" },
     ],
     stepContent: {
       importance: {
@@ -379,14 +379,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -777,9 +775,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,

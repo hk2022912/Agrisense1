@@ -12,311 +12,348 @@ import {
   Animated,
   Modal,
 } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 
-// Translation data for fertilizer guide
+// Translation data
 const TRANSLATIONS = {
   en: {
-    headerTitle: "Complete Fertilizer Guide",
+    headerTitle: "Soil Moisture Management Guide",
     progressTitle: "Your Progress",
     complete: "Complete",
     nextUp: "Next Up:",
     tapToContinue: "Tap to continue →",
     steps: [
-      { title: "What is Soil Fertility?", emoji: "🌱" },
-      { title: "Organic Fertilizers", emoji: "🍃" },
-      { title: "Inorganic Fertilizers", emoji: "⚗️" },
-      { title: "Integrated Approach", emoji: "⚖️" },
-      { title: "Best Practices", emoji: "📊" },
+      { title: "Why Soil Moisture Matters", icon: "water" },
+      { title: "Understanding Soil Water Types", icon: "water-opacity" },
+      { title: "Techniques to Maintain Ideal Soil Moisture", icon: "sprout" },
+      { title: "Monitor & Adjust Soil Moisture", icon: "magnify" },
+      { title: "Match Irrigation to Soil Type", icon: "terrain" },
+      { title: "Beginner’s Action Steps", icon: "checkbox-marked-circle-outline" },
     ],
     stepContent: {
-      soilFertility: {
-        title: "What is Soil Fertility?",
-        subtitle: "Understanding the foundation of healthy plant growth",
-        definition:
-          "Soil fertility refers to its ability to support healthy plant growth by supplying nutrients like nitrogen (N), phosphorus (P), and potassium (K).",
-        problems: "Unfertile soil causes:",
-        issues: ["Low yields", "Weak crops", "Pest problems"],
-        keyNutrients: "Essential nutrients (NPK):",
-        nutrients: [
-          { symbol: "N", name: "Nitrogen", role: "Leaf growth and green color" },
-          { symbol: "P", name: "Phosphorus", role: "Root development and flowering" },
-          { symbol: "K", name: "Potassium", role: "Disease resistance and fruit quality" },
-        ],
-        button: "Learn About Organic Fertilizers",
-      },
-      organic: {
-        title: "Organic Fertilizers",
-        subtitle: "Natural nutrition for sustainable farming",
-        definition: "Made from natural sources like:",
-        sources: ["Animal manure", "Compost/plant waste", "Fish/food waste"],
+      whyImportant: {
+        title: "Why Soil Moisture Matters",
+        subtitle: "Not Too Wet. Not Too Dry. Just Right.",
+        description:
+          "Soil moisture is the amount of water held between soil particles. It directly affects seed germination, root development, nutrient absorption, and overall crop health.",
         benefits: [
-          "Enhance beneficial soil microbes",
-          "Improve root growth and crop productivity",
-          "Raise soil carbon and moisture retention",
-          "Minimize environmental pollution",
+          "Supports healthy microbial life",
+          "Reduces crop stress and drought risk",
+          "Maximizes fertilizer effectiveness",
+          "Improves yield and crop consistency",
+          "Prevents root rot and waterlogging",
         ],
-        limitations: ["Slow nutrient release", "Variable content", "Higher labor needs", "Affected by weather"],
-        scientificSources: "Sources: Frontiers in Microbiology (2025), Soil Science (2025)",
-        button: "Explore Chemical Fertilizers",
+        sources: "Sources: fao.org | agritech.tnau.ac.in | frontiersin.org/articles/10.3389/fsufs.2021.657682/full",
+        button: "Got It! Let's Learn More",
       },
-      inorganic: {
-        title: "Inorganic (Chemical) Fertilizers",
-        subtitle: "Synthetic solutions for immediate results",
-        definition: "Made from synthetic/mined minerals like:",
-        sources: ["Urea (Nitrogen)", "Superphosphate (Phosphorus)", "Potash (Potassium)"],
-        benefits: ["Rapid nutrient delivery", "Precise dosage", "Easy to store and apply", "High yields short term"],
-        limitations: [
-          "No improvement to soil life",
-          "Risk of soil damage (acidification/salinity)",
-          "Runoff pollution risk",
-          "Decreased soil biodiversity over time",
+      soilWaterTypes: {
+        title: "Understanding Soil Water Types",
+        subtitle: "Different Types of Water in Soil",
+        types: [
+          {
+            name: "Gravitational Water",
+            description: ["Drains quickly after rain or irrigation", "Not available to plants", "Common in sandy soils"],
+          },
+          {
+            name: "Capillary Water",
+            description: ["Held between soil particles", "Easily available for plant uptake", "Ideal moisture range"],
+          },
+          {
+            name: "Hygroscopic Water",
+            description: ["Tightly bound to soil particles", "Unavailable to plants", "Dominant in clay-heavy, dry soils"],
+          },
         ],
-        scientificSources: "Sources: Environmental Research (2024), ScienceDirect (2023–2024)",
-        button: "Discover Integrated Approach",
+        tip: "Plants thrive best when soil holds capillary water, just before the “wilting point.”",
+        button: "Ready to Learn Techniques!",
       },
-      integrated: {
-        title: "Integrated Fertilizer Use",
-        subtitle: "Best of both worlds approach",
-        definition: "Combines organic and inorganic methods for optimal results",
-        benefits: [
-          "Improves nutrient uptake",
-          "Supports soil health and biodiversity",
-          "Increases crop yield sustainably",
-          "Reduces chemical dependency",
+      techniques: {
+        title: "Techniques to Maintain Ideal Soil Moisture",
+        subtitle: "Practical Methods for Water Management",
+        techniques: [
+          {
+            name: "Mulching",
+            description: ["Use dried leaves, straw, or rice hulls to prevent surface evaporation", "Keeps soil cool and conserves water"],
+          },
+          {
+            name: "Drip Irrigation or Soaker Hoses",
+            description: ["Delivers water directly to roots with minimal waste", "Prevents overwatering and leaf diseases"],
+          },
+          {
+            name: "Organic Matter Boost",
+            description: [
+              "Compost and vermicompost improve soil’s sponge-like quality",
+              "Helps sandy soils hold more water",
+              "Improves drainage in compacted soils",
+            ],
+          },
+          {
+            name: "Cover Crops",
+            description: ["Reduce evaporation and shade the soil", "Prevent soil cracking during dry spells"],
+          },
         ],
-        example: "Example:",
-        studyResult:
-          "2025 Yangzhou, China study showed 38% higher rice yield and reduced emissions using integrated fertilization.",
-        keyPrinciple: "Key Principle:",
-        principle:
-          "Fertilizers feed crops—but healthy soil feeds your farm. Use the right fertilizer, in the right amount, at the right time.",
-        button: "View Best Practices",
+        source: "Source: mdpi.com/2073-4395/11/6/1145",
+        button: "Let’s Monitor Soil Moisture!",
       },
-      bestPractices: {
-        title: "Best Practices & Comparison",
-        subtitle: "Choose the right fertilizer for your needs",
-        tableTitle: "Fertilizer Comparison Table",
-        comparisonData: [
+      monitorAdjust: {
+        title: "Monitor & Adjust Soil Moisture",
+        subtitle: "Stay on Top of Your Soil’s Needs",
+        tools: [
           {
-            type: "Organic",
-            emoji: "🍃",
-            madeFrom: "Compost, manure",
-            speed: "Slow",
-            soilHealth: "Very high",
-            bestUse: "Long-term soil health",
-            color: "#16A34A",
-            bgColor: "#DCFCE7",
+            title: "Hand Test",
+            description: "Squeeze a ball of soil—should hold together but not drip",
           },
           {
-            type: "Inorganic",
-            emoji: "⚗️",
-            madeFrom: "Synthetic compounds",
-            speed: "Fast",
-            soilHealth: "Low to medium",
-            bestUse: "Immediate crop needs",
-            color: "#DC2626",
-            bgColor: "#FEE2E2",
+            title: "Soil Moisture Meter",
+            description: "Affordable probes for real-time readings",
           },
           {
-            type: "Integrated",
-            emoji: "⚖️",
-            madeFrom: "Organic + Inorganic",
-            speed: "Balanced",
-            soilHealth: "High",
-            bestUse: "Sustainable yield + health",
-            color: "#7C3AED",
-            bgColor: "#EDE9FE",
+            title: "Tensiometers",
+            description: "Measure how hard plants must work to extract water",
+          },
+          {
+            title: "Mobile Apps",
+            description: "Some track rainfall and moisture levels using local data",
           },
         ],
-        bestPractices: "Best Practices:",
-        practices: [
+        signs: {
+          title: "Signs of Moisture Problems",
+          problems: ["Too dry? Wilting, curling leaves, cracked soil", "Too wet? Yellowing leaves, root rot, fungal growth"],
+        },
+        evidence: "Studies show that regular monitoring can increase water use efficiency by 30–50%.",
+        button: "Let’s Match Irrigation to Soil!",
+      },
+      irrigationSoilType: {
+        title: "Match Irrigation to Soil Type",
+        subtitle: "Tailor Watering to Your Soil",
+        tableTitle: "Irrigation by Soil Type",
+        headers: ["Soil Type", "Moisture Behavior", "Irrigation Tip"],
+        rows: [
+          ["Sandy soil", "Drains quickly", "Water more often, less volume"],
+          ["Loamy soil", "Balanced moisture", "Ideal for most crops"],
+          ["Clay soil", "Holds water longer", "Water deeply but less often"],
+        ],
+        source: "Source: agriculture.gov.au",
+        button: "Show Me Action Steps!",
+      },
+      actionSteps: {
+        title: "Beginner’s Action Steps",
+        subtitle: "Simple Steps to Start Managing Soil Moisture",
+        steps: [
           {
-            title: "Test your soil first",
-            description: "Know what nutrients your soil needs before applying fertilizers",
-            icon: "flask-outline",
+            title: "Check your soil type and water-holding capacity",
+            description: "Understand your soil to plan effective watering",
           },
           {
-            title: "Follow application timing",
-            description: "Apply fertilizers when plants can best utilize the nutrients",
-            icon: "time-outline",
+            title: "Mulch your plots to reduce evaporation",
+            description: "Use organic materials to conserve water",
           },
           {
-            title: "Use proper amounts",
-            description: "More is not always better - follow recommended dosages",
-            icon: "scale-outline",
+            title: "Install a basic drip or bucket irrigation system",
+            description: "Ensure efficient water delivery to roots",
           },
           {
-            title: "Consider environmental impact",
-            description: "Choose methods that protect water sources and soil health",
-            icon: "leaf-outline",
+            title: "Add compost to improve soil water retention",
+            description: "Boost soil’s ability to hold moisture",
+          },
+          {
+            title: "Water early in the morning or late afternoon to reduce loss",
+            description: "Minimize evaporation during cooler parts of the day",
+          },
+          {
+            title: "Track rainfall and adjust watering based on soil feel",
+            description: "Monitor conditions to avoid over- or under-watering",
           },
         ],
-        button: "I'm Ready to Apply This Knowledge!",
+        tip: {
+          title: "Farmer Tip",
+          text: '"Don’t wait for crops to droop. Healthy soil should feel like a wrung-out sponge—moist, not muddy."',
+        },
+        button: "I’m Ready to Start!",
       },
     },
     modal: {
       completionTitle: "Guide Complete!",
       completionText:
-        "You now understand the different types of fertilizers and how to use them effectively for healthy, productive crops!",
-      completionButton: "Excellent!",
+        "You’ve mastered the fundamentals of soil moisture management. Your crops and soil will thrive with this knowledge!",
+      completionButton: "Amazing!",
     },
   },
   tl: {
-    headerTitle: "Kumpletong Gabay sa Fertilizer",
+    headerTitle: "Gabay sa Pamamahala ng Kahalumigmigan ng Lupa",
     progressTitle: "Inyong Progreso",
     complete: "Tapos na",
     nextUp: "Susunod:",
     tapToContinue: "Pindutin para magpatuloy →",
     steps: [
-      { title: "Ano ang Soil Fertility?", emoji: "🌱" },
-      { title: "Organic Fertilizers", emoji: "🍃" },
-      { title: "Inorganic Fertilizers", emoji: "⚗️" },
-      { title: "Integrated Approach", emoji: "⚖️" },
-      { title: "Best Practices", emoji: "📊" },
+      { title: "Bakit Mahalaga ang Kahalumigmigan ng Lupa", icon: "water" },
+      { title: "Pag-unawa sa mga Uri ng Tubig sa Lupa", icon: "water-opacity" },
+      { title: "Mga Teknik para Panatilihin ang Tamang Kahalumigmigan", icon: "sprout" },
+      { title: "Subaybayan at Ayusin ang Kahalumigmigan ng Lupa", icon: "magnify" },
+      { title: "Itugma ang Patubig sa Uri ng Lupa", icon: "terrain" },
+      { title: "Mga Hakbang para sa mga Nagsisimula", icon: "checkbox-marked-circle-outline" },
     ],
     stepContent: {
-      soilFertility: {
-        title: "Ano ang Soil Fertility?",
-        subtitle: "Pag-unawa sa pundasyon ng malusog na paglaki ng halaman",
-        definition:
-          "Ang soil fertility ay tumutukoy sa kakayahan nito na suportahan ang malusog na paglaki ng halaman sa pamamagitan ng pagbibigay ng nutrients tulad ng nitrogen (N), phosphorus (P), at potassium (K).",
-        problems: "Ang hindi fertile na lupa ay nagdudulot ng:",
-        issues: ["Mababang ani", "Mahinang pananim", "Mga problema sa peste"],
-        keyNutrients: "Mahahalagang nutrients (NPK):",
-        nutrients: [
-          { symbol: "N", name: "Nitrogen", role: "Paglaki ng dahon at berdeng kulay" },
-          { symbol: "P", name: "Phosphorus", role: "Pag-develop ng ugat at pamumulaklak" },
-          { symbol: "K", name: "Potassium", role: "Resistance sa sakit at kalidad ng prutas" },
-        ],
-        button: "Matuto Tungkol sa Organic Fertilizers",
-      },
-      organic: {
-        title: "Organic Fertilizers",
-        subtitle: "Natural na nutrisyon para sa sustainable farming",
-        definition: "Gawa mula sa natural na sources tulad ng:",
-        sources: ["Animal manure", "Compost/plant waste", "Fish/food waste"],
+      whyImportant: {
+        title: "Bakit Mahalaga ang Kahalumigmigan ng Lupa",
+        subtitle: "Hindi Masyadong Basa. Hindi Masyadong Tuyo. Tama Lang.",
+        description:
+          "Ang kahalumigmigan ng lupa ay ang dami ng tubig na hawak sa pagitan ng mga particle ng lupa. Direktang nakakaapekto ito sa pagtubo ng binhi, pag-unlad ng ugat, pagsipsip ng sustansya, at pangkalahatang kalusugan ng pananim.",
         benefits: [
-          "Pinapahusay ang beneficial soil microbes",
-          "Pinapabuti ang root growth at crop productivity",
-          "Pinapataas ang soil carbon at moisture retention",
-          "Binabawasan ang environmental pollution",
+          "Sumusuporta sa malusog na microbial life",
+          "Binabawasan ang stress ng pananim at panganib ng tagtuyot",
+          "Pinapataas ang bisa ng pataba",
+          "Pinapabuti ang ani at pagkakapare-pareho ng pananim",
+          "Pinipigilan ang pagkabulok ng ugat at waterlogging",
         ],
-        limitations: [
-          "Mabagal na nutrient release",
-          "Variable na content",
-          "Mas mataas na labor needs",
-          "Naapektuhan ng panahon",
-        ],
-        scientificSources: "Sources: Frontiers in Microbiology (2025), Soil Science (2025)",
-        button: "Tuklasin ang Chemical Fertilizers",
+        sources: "Sources: fao.org | agritech.tnau.ac.in | frontiersin.org/articles/10.3389/fsufs.2021.657682/full",
+        button: "Nakuha Ko! Matuto Pa Tayo",
       },
-      inorganic: {
-        title: "Inorganic (Chemical) Fertilizers",
-        subtitle: "Synthetic na solusyon para sa agarang resulta",
-        definition: "Gawa mula sa synthetic/mined minerals tulad ng:",
-        sources: ["Urea (Nitrogen)", "Superphosphate (Phosphorus)", "Potash (Potassium)"],
-        benefits: [
-          "Mabilis na nutrient delivery",
-          "Tumpak na dosage",
-          "Madaling i-store at i-apply",
-          "Mataas na ani sa maikling panahon",
+      soilWaterTypes: {
+        title: "Pag-unawa sa mga Uri ng Tubig sa Lupa",
+        subtitle: "Iba't Ibang Uri ng Tubig sa Lupa",
+        types: [
+          {
+            name: "Gravitational Water",
+            description: [
+              "Mabilis na umaagos pagkatapos ng ulan o patubig",
+              "Hindi magagamit ng mga halaman",
+              "Karaniwan sa mabuhanging lupa",
+            ],
+          },
+          {
+            name: "Capillary Water",
+            description: [
+              "Hinawakan sa pagitan ng mga particle ng lupa",
+              "Madaling magagamit para sa pagsipsip ng halaman",
+              "Tamang hanay ng kahalumigmigan",
+            ],
+          },
+          {
+            name: "Hygroscopic Water",
+            description: [
+              "Mahigpit na nakakabit sa mga particle ng lupa",
+              "Hindi magagamit ng mga halaman",
+              "Nangingibabaw sa lupaing mataas sa clay at tuyo",
+            ],
+          },
         ],
-        limitations: [
-          "Walang pagpapabuti sa soil life",
-          "Risk ng soil damage (acidification/salinity)",
-          "Risk ng runoff pollution",
-          "Bumababa ang soil biodiversity sa paglipas ng panahon",
-        ],
-        scientificSources: "Sources: Environmental Research (2024), ScienceDirect (2023–2024)",
-        button: "Tuklasin ang Integrated Approach",
+        tip: "Pinakamahusay na umuunlad ang mga halaman kapag ang lupa ay may hawak na capillary water, bago ang “wilting point.”",
+        button: "Handa na Matuto ng mga Teknik!",
       },
-      integrated: {
-        title: "Integrated Fertilizer Use",
-        subtitle: "Best of both worlds approach",
-        definition: "Pinagsasama ang organic at inorganic methods para sa optimal na resulta",
-        benefits: [
-          "Pinapabuti ang nutrient uptake",
-          "Sinusuportahan ang soil health at biodiversity",
-          "Pinapataas ang crop yield nang sustainable",
-          "Binabawasan ang chemical dependency",
+      techniques: {
+        title: "Mga Teknik para Panatilihin ang Tamang Kahalumigmigan",
+        subtitle: "Mga Praktikal na Paraan para sa Pamamahala ng Tubig",
+        techniques: [
+          {
+            name: "Mulching",
+            description: ["Gumamit ng tuyong dahon, dayami, o balat ng palay para maiwasan ang pagsingaw sa ibabaw", "Pinapanatili ang lamig ng lupa at nagtitipid ng tubig"],
+          },
+          {
+            name: "Drip Irrigation o Soaker Hoses",
+            description: ["Nagdadala ng tubig diretso sa mga ugat na may kaunting basura", "Pinipigilan ang sobrang pagdidilig at sakit sa dahon"],
+          },
+          {
+            name: "Organic Matter Boost",
+            description: [
+              "Ang compost at vermicompost ay nagpapabuti sa kalidad ng lupa na parang espongha",
+              "Tumutulong sa mabuhanging lupa na hawakan ang mas maraming tubig",
+              "Pinapabuti ang drainage sa mga siksik na lupa",
+            ],
+          },
+          {
+            name: "Cover Crops",
+            description: ["Binabawasan ang pagsingaw at nagtatabing sa lupa", "Pinipigilan ang pagkakahati ng lupa sa mga tuyong panahon"],
+          },
         ],
-        example: "Halimbawa:",
-        studyResult:
-          "Ang 2025 Yangzhou, China study ay nagpakita ng 38% na mas mataas na rice yield at nabawasang emissions gamit ang integrated fertilization.",
-        keyPrinciple: "Pangunahing Prinsipyo:",
-        principle:
-          "Ang mga fertilizer ay nagpapakain sa pananim—pero ang malusog na lupa ang nagpapakain sa inyong farm. Gamitin ang tamang fertilizer, sa tamang dami, sa tamang oras.",
-        button: "Tingnan ang Best Practices",
+        source: "Source: mdpi.com/2073-4395/11/6/1145",
+        button: "Subaybayan Natin ang Kahalumigmigan ng Lupa!",
       },
-      bestPractices: {
-        title: "Best Practices at Paghahambing",
-        subtitle: "Pumili ng tamang fertilizer para sa inyong pangangailangan",
-        tableTitle: "Fertilizer Comparison Table",
-        comparisonData: [
+      monitorAdjust: {
+        title: "Subaybayan at Ayusin ang Kahalumigmigan ng Lupa",
+        subtitle: "Manatiling Alerto sa mga Pangangailangan ng Inyong Lupa",
+        tools: [
           {
-            type: "Organic",
-            emoji: "🍃",
-            madeFrom: "Compost, manure",
-            speed: "Mabagal",
-            soilHealth: "Napakataas",
-            bestUse: "Pangmatagalang kalusugan ng lupa",
-            color: "#16A34A",
-            bgColor: "#DCFCE7",
+            title: "Hand Test",
+            description: "Pisilin ang isang bola ng lupa—dapat magkadikit ngunit hindi tumulo",
           },
           {
-            type: "Inorganic",
-            emoji: "⚗️",
-            madeFrom: "Synthetic compounds",
-            speed: "Mabilis",
-            soilHealth: "Mababa hanggang katamtaman",
-            bestUse: "Agarang pangangailangan ng pananim",
-            color: "#DC2626",
-            bgColor: "#FEE2E2",
+            title: "Soil Moisture Meter",
+            description: "Abot-kayang mga probe para sa real-time na pagbabasa",
           },
           {
-            type: "Integrated",
-            emoji: "⚖️",
-            madeFrom: "Organic + Inorganic",
-            speed: "Balanced",
-            soilHealth: "Mataas",
-            bestUse: "Sustainable na ani + kalusugan",
-            color: "#7C3AED",
-            bgColor: "#EDE9FE",
+            title: "Tensiometers",
+            description: "Sinusukat kung gaano kahirap kailangang magtrabaho ang mga halaman para kumuha ng tubig",
+          },
+          {
+            title: "Mobile Apps",
+            description: "Ang ilan ay sumusubaybay sa ulan at antas ng kahalumigmigan gamit ang lokal na datos",
           },
         ],
-        bestPractices: "Best Practices:",
-        practices: [
+        signs: {
+          title: "Mga Palatandaan ng Problema sa Kahalumigmigan",
+          problems: [
+            "Masyadong tuyo? Nalalanta, nagkukulot na dahon, basag na lupa",
+            "Masyadong basa? Naninilaw na dahon, nabubulok na ugat, pagtubo ng fungi",
+          ],
+        },
+        evidence: "Ipinapakita ng mga pag-aaral na ang regular na pagsubaybay ay maaaring magpataas ng kahusayan sa paggamit ng tubig ng 30–50%.",
+        button: "Itugma Natin ang Patubig sa Lupa!",
+      },
+      irrigationSoilType: {
+        title: "Itugma ang Patubig sa Uri ng Lupa",
+        subtitle: "Iayon ang Pagdidilig sa Inyong Lupa",
+        tableTitle: "Patubig ayon sa Uri ng Lupa",
+        headers: ["Uri ng Lupa", "Pag-uugali ng Kahalumigmigan", "Tip sa Patubig"],
+        rows: [
+          ["Mabuhanging lupa", "Mabilis na umaagos", "Magdilig nang madalas, mas kaunting dami"],
+          ["Loamy na lupa", "Balanseng kahalumigmigan", "Mainam para sa karamihan ng pananim"],
+          ["Lupang clay", "Mas matagal humawak ng tubig", "Magdilig nang malalim ngunit hindi madalas"],
+        ],
+        source: "Source: agriculture.gov.au",
+        button: "Ipakita ang mga Hakbang!",
+      },
+      actionSteps: {
+        title: "Mga Hakbang para sa mga Nagsisimula",
+        subtitle: "Mga Simpleng Hakbang para Simulan ang Pamamahala ng Kahalumigmigan ng Lupa",
+        steps: [
           {
-            title: "Subukan muna ang inyong lupa",
-            description: "Alamin kung anong nutrients ang kailangan ng inyong lupa bago mag-apply ng fertilizers",
-            icon: "flask-outline",
+            title: "Suriin ang uri ng lupa at kapasidad na humawak ng tubig",
+            description: "Unawain ang inyong lupa para magplano ng epektibong pagdidilig",
           },
           {
-            title: "Sundin ang application timing",
-            description: "Mag-apply ng fertilizers kapag pinakamahusay na magagamit ng mga halaman ang nutrients",
-            icon: "time-outline",
+            title: "Mag-mulch sa mga plot para mabawasan ang pagsingaw",
+            description: "Gumamit ng organikong materyales para makatipid ng tubig",
           },
           {
-            title: "Gumamit ng tamang dami",
-            description: "Ang mas marami ay hindi palaging mas maganda - sundin ang recommended dosages",
-            icon: "scale-outline",
+            title: "Mag-install ng pangunahing drip o bucket irrigation system",
+            description: "Tiyakin ang mahusay na pagdadala ng tubig sa mga ugat",
           },
           {
-            title: "Isaalang-alang ang environmental impact",
-            description: "Pumili ng mga paraan na nagpoprotekta sa water sources at kalusugan ng lupa",
-            icon: "leaf-outline",
+            title: "Magdagdag ng compost para mapabuti ang paghawak ng tubig sa lupa",
+            description: "Palakasin ang kakayahan ng lupa na humawak ng kahalumigmigan",
+          },
+          {
+            title: "Magdilig ng maaga sa umaga o hapon para mabawasan ang pagkawala",
+            description: "Iwasan ang pagsingaw sa mas malamig na bahagi ng araw",
+          },
+          {
+            title: "Subaybayan ang ulan at ayusin ang pagdidilig batay sa pakiramdam ng lupa",
+            description: "Subaybayan ang mga kondisyon para maiwasan ang sobra o kulang na pagdidilig",
           },
         ],
-        button: "Handa na Akong Gamitin ang Kaalamang Ito!",
+        tip: {
+          title: "Tip mula sa Magsasaka",
+          text: '"Huwag hintayin na malanta ang mga pananim. Ang malusog na lupa ay dapat pakiramdam ay parang esponghang piniga—basa, hindi maputik."',
+        },
+        button: "Handa na Akong Magsimula!",
       },
     },
     modal: {
       completionTitle: "Tapos na ang Gabay!",
       completionText:
-        "Nauunawaan ninyo na ngayon ang iba't ibang uri ng fertilizers at kung paano gamitin ang mga ito nang epektibo para sa malusog at produktibong pananim!",
-      completionButton: "Napakahusay!",
+        "Natutunan ninyo na ang mga pangunahing kaalaman sa pamamahala ng kahalumigmigan ng lupa. Uunlad ang inyong mga pananim at lupa dahil sa kaalamang ito!",
+      completionButton: "Kahanga-hanga!",
     },
   },
 }
@@ -328,14 +365,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -372,7 +407,7 @@ const StepNavigation = ({ steps, currentStep, completedSteps, onStepPress }) => 
           onPress={() => onStepPress(index)}
         >
           {completedSteps.includes(index) && (
-            <Ionicons name="checkmark-circle" size={16} color="#16A34A" style={{ marginRight: 4 }} />
+            <MaterialCommunityIcons name="check-circle" size={16} color="#16A34A" style={{ marginRight: 4 }} />
           )}
           <Text
             style={[
@@ -392,19 +427,19 @@ const StepNavigation = ({ steps, currentStep, completedSteps, onStepPress }) => 
 const CompleteButton = ({ onPress, children, isLoading = false }) => (
   <TouchableOpacity style={styles.completeButton} onPress={onPress} disabled={isLoading} activeOpacity={0.8}>
     <Text style={styles.completeButtonText}>{children}</Text>
-    <Ionicons name="chevron-forward" size={20} color="#fff" />
+    <MaterialCommunityIcons name="chevron-right" size={20} color="#fff" />
   </TouchableOpacity>
 )
 
 // Main Component
-export default function FertilizerGuide() {
+export default function SoilMoistureGuide() {
   const navigation = useNavigation()
   const [currentStep, setCurrentStep] = useState(0)
   const [completedSteps, setCompletedSteps] = useState([])
-  const [showCompletionModal, setShowCompletionModal] = useState(false)
   const [progressAnim] = useState(new Animated.Value(0))
   const [isNavigating, setIsNavigating] = useState(false)
   const [language, setLanguage] = useState("en")
+  const [showCompletionModal, setShowCompletionModal] = useState(false)
   const t = TRANSLATIONS[language]
 
   const handleStepComplete = (stepIndex) => {
@@ -430,238 +465,198 @@ export default function FertilizerGuide() {
     }
   }
 
-  const renderSoilFertilityStep = () => (
+  const renderWhyImportantStep = () => (
     <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>{t.stepContent.soilFertility.title}</Text>
-      <Text style={styles.stepSubtitle}>{t.stepContent.soilFertility.subtitle}</Text>
-      <Text style={styles.description}>{t.stepContent.soilFertility.definition}</Text>
-
-      <Text style={styles.sectionTitle}>{t.stepContent.soilFertility.problems}</Text>
-      <View style={styles.issuesCard}>
-        {t.stepContent.soilFertility.issues.map((issue, index) => (
-          <View key={index} style={styles.issueItem}>
-            <Ionicons name="warning-outline" size={18} color="#DC2626" />
-            <Text style={styles.issueText}>{issue}</Text>
-          </View>
-        ))}
-      </View>
-
-      <Text style={styles.sectionTitle}>{t.stepContent.soilFertility.keyNutrients}</Text>
-      <View style={styles.nutrientsContainer}>
-        {t.stepContent.soilFertility.nutrients.map((nutrient, index) => (
-          <View key={index} style={styles.nutrientCard}>
-            <View style={styles.nutrientSymbol}>
-              <Text style={styles.nutrientSymbolText}>{nutrient.symbol}</Text>
-            </View>
-            <View style={styles.nutrientInfo}>
-              <Text style={styles.nutrientName}>{nutrient.name}</Text>
-              <Text style={styles.nutrientRole}>{nutrient.role}</Text>
-            </View>
-          </View>
-        ))}
-      </View>
-
-      <CompleteButton onPress={() => handleStepComplete(0)} isLoading={isNavigating}>
-        {t.stepContent.soilFertility.button}
-      </CompleteButton>
-    </View>
-  )
-
-  const renderOrganicStep = () => (
-    <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>{t.stepContent.organic.title}</Text>
-      <Text style={styles.stepSubtitle}>{t.stepContent.organic.subtitle}</Text>
-      <Text style={styles.description}>{t.stepContent.organic.definition}</Text>
-
-      <View style={styles.fertilizerCard}>
-        <Text style={styles.fertilizerEmoji}>🍃</Text>
-        <View style={styles.fertilizerContent}>
-          <Text style={styles.fertilizerTitle}>Sources:</Text>
-          {t.stepContent.organic.sources.map((source, index) => (
-            <Text key={index} style={styles.fertilizerItem}>
-              • {source}
-            </Text>
-          ))}
-        </View>
-      </View>
+      <Text style={styles.stepTitle}>{t.stepContent.whyImportant.title}</Text>
+      <Text style={styles.stepSubtitle}>{t.stepContent.whyImportant.subtitle}</Text>
+      <Text style={styles.description}>{t.stepContent.whyImportant.description}</Text>
 
       <View style={styles.benefitsCard}>
-        <Text style={styles.cardTitle}>Benefits:</Text>
-        {t.stepContent.organic.benefits.map((benefit, index) => (
+        {t.stepContent.whyImportant.benefits.map((benefit, index) => (
           <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#16A34A" />
+            <MaterialCommunityIcons name="check-circle" size={18} color="#16A34A" />
             <Text style={styles.benefitText}>{benefit}</Text>
           </View>
         ))}
       </View>
 
-      <View style={styles.limitationsCard}>
-        <Text style={styles.cardTitle}>Limitations:</Text>
-        {t.stepContent.organic.limitations.map((limitation, index) => (
-          <View key={index} style={styles.limitationItem}>
-            <Ionicons name="warning-outline" size={18} color="#DC2626" />
-            <Text style={styles.limitationText}>{limitation}</Text>
-          </View>
-        ))}
-      </View>
+      <Text style={styles.sources}>{t.stepContent.whyImportant.sources}</Text>
 
-      <View style={styles.sourcesCard}>
-        <Text style={styles.sources}>{t.stepContent.organic.scientificSources}</Text>
+      <CompleteButton onPress={() => handleStepComplete(0)} isLoading={isNavigating}>
+        {t.stepContent.whyImportant.button}
+      </CompleteButton>
+    </View>
+  )
+
+  const renderSoilWaterTypesStep = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>{t.stepContent.soilWaterTypes.title}</Text>
+      <Text style={styles.stepSubtitle}>{t.stepContent.soilWaterTypes.subtitle}</Text>
+
+      {t.stepContent.soilWaterTypes.types.map((type, index) => (
+        <View key={index} style={styles.benefitsCard}>
+          <Text style={styles.sectionTitle}>{type.name}</Text>
+          {type.description.map((desc, idx) => (
+            <View key={idx} style={styles.benefitItem}>
+              <MaterialCommunityIcons name="check-circle" size={18} color="#16A34A" />
+              <Text style={styles.benefitText}>{desc}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
+
+      <View style={styles.tipCard}>
+        <MaterialCommunityIcons name="lightbulb-outline" size={24} color="#D97706" />
+        <View style={styles.tipContent}>
+          <Text style={styles.tipText}>{t.stepContent.soilWaterTypes.tip}</Text>
+        </View>
       </View>
 
       <CompleteButton onPress={() => handleStepComplete(1)} isLoading={isNavigating}>
-        {t.stepContent.organic.button}
+        {t.stepContent.soilWaterTypes.button}
       </CompleteButton>
     </View>
   )
 
-  const renderInorganicStep = () => (
+  const renderTechniquesStep = () => (
     <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>{t.stepContent.inorganic.title}</Text>
-      <Text style={styles.stepSubtitle}>{t.stepContent.inorganic.subtitle}</Text>
-      <Text style={styles.description}>{t.stepContent.inorganic.definition}</Text>
+      <Text style={styles.stepTitle}>{t.stepContent.techniques.title}</Text>
+      <Text style={styles.stepSubtitle}>{t.stepContent.techniques.subtitle}</Text>
 
-      <View style={styles.fertilizerCard}>
-        <Text style={styles.fertilizerEmoji}>⚗️</Text>
-        <View style={styles.fertilizerContent}>
-          <Text style={styles.fertilizerTitle}>Sources:</Text>
-          {t.stepContent.inorganic.sources.map((source, index) => (
-            <Text key={index} style={styles.fertilizerItem}>
-              • {source}
+      {t.stepContent.techniques.techniques.map((technique, index) => (
+        <View key={index} style={styles.benefitsCard}>
+          <Text style={styles.sectionTitle}>{technique.name}</Text>
+          {technique.description.map((desc, idx) => (
+            <View key={idx} style={styles.benefitItem}>
+              <MaterialCommunityIcons name="check-circle" size={18} color="#16A34A" />
+              <Text style={styles.benefitText}>{desc}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
+
+      <Text style={styles.sources}>{t.stepContent.techniques.source}</Text>
+
+      <CompleteButton onPress={() => handleStepComplete(2)} isLoading={isNavigating}>
+        {t.stepContent.techniques.button}
+      </CompleteButton>
+    </View>
+  )
+
+  const renderMonitorAdjustStep = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>{t.stepContent.monitorAdjust.title}</Text>
+      <Text style={styles.stepSubtitle}>{t.stepContent.monitorAdjust.subtitle}</Text>
+
+      <View style={styles.monitoringGrid}>
+        {t.stepContent.monitorAdjust.tools.map((tool, index) => (
+          <View key={index} style={styles.monitoringItem}>
+            <View style={styles.monitoringIconContainer}>
+              <MaterialCommunityIcons
+                name={["hand-back-right-outline", "gauge", "tune", "cellphone-information"][index]}
+                size={20}
+                color="#16A34A"
+              />
+            </View>
+            <View style={styles.monitoringItemContent}>
+              <Text style={styles.monitoringItemTitle}>{tool.title}</Text>
+              <Text style={styles.monitoringItemDescription}>{tool.description}</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+
+      <Text style={styles.sectionTitle}>{t.stepContent.monitorAdjust.signs.title}</Text>
+      {t.stepContent.monitorAdjust.signs.problems.map((problem, index) => (
+        <View key={index} style={styles.benefitItem}>
+          <MaterialCommunityIcons name="alert-circle-outline" size={18} color="#D97706" />
+          <Text style={styles.benefitText}>{problem}</Text>
+        </View>
+      ))}
+
+      <Text style={styles.description}>{t.stepContent.monitorAdjust.evidence}</Text>
+
+      <CompleteButton onPress={() => handleStepComplete(3)} isLoading={isNavigating}>
+        {t.stepContent.monitorAdjust.button}
+      </CompleteButton>
+    </View>
+  )
+
+  const renderIrrigationSoilTypeStep = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>{t.stepContent.irrigationSoilType.title}</Text>
+      <Text style={styles.stepSubtitle}>{t.stepContent.irrigationSoilType.subtitle}</Text>
+
+      <Text style={styles.tableTitle}>{t.stepContent.irrigationSoilType.tableTitle}</Text>
+
+      <View style={styles.rotationTable}>
+        <View style={styles.rotationHeader}>
+          {t.stepContent.irrigationSoilType.headers.map((header, index) => (
+            <Text key={index} style={styles.rotationHeaderText}>
+              {header}
             </Text>
           ))}
         </View>
-      </View>
-
-      <View style={styles.benefitsCard}>
-        <Text style={styles.cardTitle}>Benefits:</Text>
-        {t.stepContent.inorganic.benefits.map((benefit, index) => (
-          <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#16A34A" />
-            <Text style={styles.benefitText}>{benefit}</Text>
+        {t.stepContent.irrigationSoilType.rows.map((row, index) => (
+          <View key={index} style={styles.rotationRow}>
+            {row.map((cell, idx) => (
+              <View key={idx} style={styles.plotCell}>
+                <Text style={styles.plotName}>{cell}</Text>
+              </View>
+            ))}
           </View>
         ))}
       </View>
 
-      <View style={styles.limitationsCard}>
-        <Text style={styles.cardTitle}>Limitations:</Text>
-        {t.stepContent.inorganic.limitations.map((limitation, index) => (
-          <View key={index} style={styles.limitationItem}>
-            <Ionicons name="warning-outline" size={18} color="#DC2626" />
-            <Text style={styles.limitationText}>{limitation}</Text>
-          </View>
-        ))}
-      </View>
+      <Text style={styles.sources}>{t.stepContent.irrigationSoilType.source}</Text>
 
-      <View style={styles.sourcesCard}>
-        <Text style={styles.sources}>{t.stepContent.inorganic.scientificSources}</Text>
-      </View>
-
-      <CompleteButton onPress={() => handleStepComplete(2)} isLoading={isNavigating}>
-        {t.stepContent.inorganic.button}
+      <CompleteButton onPress={() => handleStepComplete(4)} isLoading={isNavigating}>
+        {t.stepContent.irrigationSoilType.button}
       </CompleteButton>
     </View>
   )
 
-  const renderIntegratedStep = () => (
+  const renderActionStepsStep = () => (
     <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>{t.stepContent.integrated.title}</Text>
-      <Text style={styles.stepSubtitle}>{t.stepContent.integrated.subtitle}</Text>
-      <Text style={styles.description}>{t.stepContent.integrated.definition}</Text>
+      <Text style={styles.stepTitle}>{t.stepContent.actionSteps.title}</Text>
+      <Text style={styles.stepSubtitle}>{t.stepContent.actionSteps.subtitle}</Text>
 
-      <View style={styles.benefitsCard}>
-        <Text style={styles.cardTitle}>Benefits:</Text>
-        {t.stepContent.integrated.benefits.map((benefit, index) => (
-          <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#16A34A" />
-            <Text style={styles.benefitText}>{benefit}</Text>
+      <View style={styles.actionStepsContainer}>
+        {t.stepContent.actionSteps.steps.map((step, index) => (
+          <View key={index} style={styles.actionStepCard}>
+            <View style={styles.stepNumberBadge}>
+              <Text style={styles.stepNumber}>{index + 1}</Text>
+            </View>
+            <View style={styles.actionStepContent}>
+              <Text style={styles.actionStepTitle}>{step.title}</Text>
+              <Text style={styles.actionStepDescription}>{step.description}</Text>
+            </View>
           </View>
         ))}
       </View>
 
-      <View style={styles.exampleCard}>
-        <Text style={styles.exampleTitle}>{t.stepContent.integrated.example}</Text>
-        <Text style={styles.exampleText}>{t.stepContent.integrated.studyResult}</Text>
-      </View>
-
-      <View style={styles.principleCard}>
-        <Ionicons name="bulb-outline" size={24} color="#D97706" />
-        <View style={styles.principleContent}>
-          <Text style={styles.principleTitle}>{t.stepContent.integrated.keyPrinciple}</Text>
-          <Text style={styles.principleText}>{t.stepContent.integrated.principle}</Text>
+      <View style={styles.tipCard}>
+        <MaterialCommunityIcons name="lightbulb-outline" size={24} color="#D97706" />
+        <View style={styles.tipContent}>
+          <Text style={styles.tipTitle}>{t.stepContent.actionSteps.tip.title}</Text>
+          <Text style={styles.tipText}>{t.stepContent.actionSteps.tip.text}</Text>
         </View>
       </View>
 
-      <CompleteButton onPress={() => handleStepComplete(3)} isLoading={isNavigating}>
-        {t.stepContent.integrated.button}
-      </CompleteButton>
-    </View>
-  )
-
-  const renderBestPracticesStep = () => (
-    <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>{t.stepContent.bestPractices.title}</Text>
-      <Text style={styles.stepSubtitle}>{t.stepContent.bestPractices.subtitle}</Text>
-
-      <Text style={styles.tableTitle}>{t.stepContent.bestPractices.tableTitle}</Text>
-
-      <View style={styles.comparisonContainer}>
-        {t.stepContent.bestPractices.comparisonData.map((item, index) => (
-          <View key={index} style={[styles.comparisonCard, { backgroundColor: item.bgColor }]}>
-            <View style={styles.comparisonHeader}>
-              <Text style={styles.comparisonEmoji}>{item.emoji}</Text>
-              <Text style={styles.comparisonType}>{item.type}</Text>
-            </View>
-            <View style={styles.comparisonDetails}>
-              <View style={styles.comparisonRow}>
-                <Text style={styles.comparisonLabel}>Made From:</Text>
-                <Text style={styles.comparisonValue}>{item.madeFrom}</Text>
-              </View>
-              <View style={styles.comparisonRow}>
-                <Text style={styles.comparisonLabel}>Speed:</Text>
-                <Text style={styles.comparisonValue}>{item.speed}</Text>
-              </View>
-              <View style={styles.comparisonRow}>
-                <Text style={styles.comparisonLabel}>Soil Health:</Text>
-                <Text style={styles.comparisonValue}>{item.soilHealth}</Text>
-              </View>
-              <View style={styles.comparisonRow}>
-                <Text style={styles.comparisonLabel}>Best Use:</Text>
-                <Text style={styles.comparisonValue}>{item.bestUse}</Text>
-              </View>
-            </View>
-          </View>
-        ))}
-      </View>
-
-      <Text style={styles.sectionTitle}>{t.stepContent.bestPractices.bestPractices}</Text>
-      <View style={styles.practicesContainer}>
-        {t.stepContent.bestPractices.practices.map((practice, index) => (
-          <View key={index} style={styles.practiceItem}>
-            <View style={styles.practiceIconContainer}>
-              <Ionicons name={practice.icon} size={24} color="#16A34A" />
-            </View>
-            <View style={styles.practiceContent}>
-              <Text style={styles.practiceTitle}>{practice.title}</Text>
-              <Text style={styles.practiceDescription}>{practice.description}</Text>
-            </View>
-          </View>
-        ))}
-      </View>
-
-      <CompleteButton onPress={() => handleStepComplete(4)} isLoading={isNavigating}>
-        {t.stepContent.bestPractices.button}
+      <CompleteButton onPress={() => handleStepComplete(5)} isLoading={isNavigating}>
+        {t.stepContent.actionSteps.button}
       </CompleteButton>
     </View>
   )
 
   const renderStepContent = () => {
     const steps = [
-      renderSoilFertilityStep,
-      renderOrganicStep,
-      renderInorganicStep,
-      renderIntegratedStep,
-      renderBestPracticesStep,
+      renderWhyImportantStep,
+      renderSoilWaterTypesStep,
+      renderTechniquesStep,
+      renderMonitorAdjustStep,
+      renderIrrigationSoilTypeStep,
+      renderActionStepsStep,
     ]
     return steps[currentStep]?.() || null
   }
@@ -674,7 +669,7 @@ export default function FertilizerGuide() {
 
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <MaterialCommunityIcons name="arrow-left" size={20} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{t.headerTitle}</Text>
         <LanguageToggle currentLanguage={language} onLanguageChange={setLanguage} />
@@ -701,7 +696,7 @@ export default function FertilizerGuide() {
         <View style={styles.modalOverlay}>
           <View style={styles.completionModal}>
             <View style={styles.completionIconContainer}>
-              <Ionicons name="nutrition-outline" size={48} color="#16A34A" />
+              <Ionicons name="trophy-outline" size={48} color="#16A34A" />
             </View>
             <Text style={styles.completionTitle}>{t.modal.completionTitle}</Text>
             <Text style={styles.completionText}>{t.modal.completionText}</Text>
@@ -711,7 +706,7 @@ export default function FertilizerGuide() {
               activeOpacity={0.8}
             >
               <Text style={styles.completionButtonText}>{t.modal.completionButton}</Text>
-              <Ionicons name="checkmark" size={20} color="#fff" style={{ marginLeft: 8 }} />
+              <MaterialCommunityIcons name="check" size={20} color="#fff" style={{ marginLeft: 8 }} />
             </TouchableOpacity>
           </View>
         </View>
@@ -735,7 +730,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E3FFCE",
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
     color: "#4A6B3E",
     flex: 1,
@@ -786,9 +781,6 @@ const styles = StyleSheet.create({
   activeLanguageButtonText: {
     color: "#fff",
   },
-  flagEmoji: {
-    fontSize: 10,
-  },
   scrollView: {
     flex: 1,
   },
@@ -800,13 +792,6 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  progressHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     shadowRadius: 2,
     elevation: 2,
   },
@@ -857,7 +842,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderWidth: 2,
     borderColor: "#E5E7EB",
-    minWidth: 120,
+    minWidth: 140,
   },
   activeStepTab: {
     backgroundColor: "#16A34A",
@@ -922,117 +907,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: "center",
   },
-  issuesCard: {
-    backgroundColor: "#FEF2F2",
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#FECACA",
-  },
-  issueItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  issueText: {
-    fontSize: 15,
-    color: "#DC2626",
-    marginLeft: 12,
-    fontWeight: "500",
-    flex: 1,
-  },
-  nutrientsContainer: {
-    marginBottom: 24,
-  },
-  nutrientCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F0FDF4",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#DCFCE7",
-  },
-  nutrientSymbol: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#16A34A",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 16,
-  },
-  nutrientSymbolText: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#fff",
-  },
-  nutrientInfo: {
-    flex: 1,
-  },
-  nutrientName: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#16A34A",
-    marginBottom: 4,
-  },
-  nutrientRole: {
-    fontSize: 14,
-    color: "#6B7280",
-    lineHeight: 20,
-  },
-  fertilizerCard: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    backgroundColor: "#F9FAFB",
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  fertilizerEmoji: {
-    fontSize: 36,
-    marginRight: 16,
-  },
-  fertilizerContent: {
-    flex: 1,
-  },
-  fertilizerTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#374151",
-    marginBottom: 8,
-  },
-  fertilizerItem: {
-    fontSize: 14,
-    color: "#6B7280",
-    marginBottom: 4,
-    lineHeight: 20,
-  },
   benefitsCard: {
     backgroundColor: "#F0FDF4",
     padding: 20,
     borderRadius: 12,
-    marginBottom: 16,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: "#DCFCE7",
-  },
-  limitationsCard: {
-    backgroundColor: "#FEF2F2",
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "#FECACA",
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#374151",
-    marginBottom: 12,
   },
   benefitItem: {
     flexDirection: "row",
@@ -1046,52 +927,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     flex: 1,
   },
-  limitationItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  limitationText: {
-    fontSize: 15,
-    color: "#DC2626",
-    marginLeft: 12,
-    fontWeight: "500",
-    flex: 1,
-  },
-  sourcesCard: {
-    backgroundColor: "#EFF6FF",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#DBEAFE",
-  },
   sources: {
     fontSize: 13,
-    color: "#1E40AF",
+    color: "#6B7280",
     fontStyle: "italic",
-    textAlign: "center",
+    marginBottom: 12,
   },
-  exampleCard: {
-    backgroundColor: "#F0FDF4",
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#DCFCE7",
-  },
-  exampleTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#16A34A",
-    marginBottom: 8,
-  },
-  exampleText: {
-    fontSize: 15,
-    color: "#16A34A",
-    lineHeight: 22,
-  },
-  principleCard: {
+  tipCard: {
     flexDirection: "row",
     alignItems: "flex-start",
     backgroundColor: "#FFFBEB",
@@ -1101,71 +943,66 @@ const styles = StyleSheet.create({
     borderColor: "#FDE68A",
     marginBottom: 24,
   },
-  principleContent: {
+  tipContent: {
     flex: 1,
     marginLeft: 12,
   },
-  principleTitle: {
+  tipTitle: {
     fontSize: 16,
     fontWeight: "700",
     color: "#D97706",
     marginBottom: 8,
   },
-  principleText: {
+  tipText: {
     fontSize: 15,
     color: "#D97706",
     lineHeight: 22,
     fontStyle: "italic",
+    marginBottom: 8,
   },
-  comparisonContainer: {
+  rotationTable: {
     marginBottom: 24,
   },
-  comparisonCard: {
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 16,
+  rotationHeader: {
+    flexDirection: "row",
+    backgroundColor: "#F9FAFB",
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: "#E5E7EB",
   },
-  comparisonHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  comparisonEmoji: {
-    fontSize: 24,
-    marginRight: 12,
-  },
-  comparisonType: {
-    fontSize: 18,
+  rotationHeaderText: {
+    flex: 1,
+    textAlign: "center",
+    fontSize: 13,
     fontWeight: "700",
     color: "#374151",
   },
-  comparisonDetails: {
-    gap: 8,
-  },
-  comparisonRow: {
+  rotationRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    marginBottom: 12,
   },
-  comparisonLabel: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#6B7280",
+  plotCell: {
     flex: 1,
+    padding: 12,
+    borderRadius: 8,
+    marginHorizontal: 2,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    backgroundColor: "#F9FAFB",
   },
-  comparisonValue: {
-    fontSize: 14,
-    fontWeight: "500",
+  plotName: {
+    fontSize: 11,
+    fontWeight: "600",
+    textAlign: "center",
     color: "#374151",
-    flex: 2,
-    textAlign: "right",
   },
-  practicesContainer: {
+  monitoringGrid: {
     marginBottom: 24,
   },
-  practiceItem: {
+  monitoringItem: {
     flexDirection: "row",
     alignItems: "flex-start",
     marginBottom: 20,
@@ -1175,28 +1012,69 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E5E7EB",
   },
-  practiceIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+  monitoringIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: "#DCFCE7",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 16,
   },
-  practiceContent: {
+  monitoringItemContent: {
     flex: 1,
   },
-  practiceTitle: {
+  monitoringItemTitle: {
     fontSize: 16,
+    fontWeight: "700",
+    color: "#374151",
+    marginBottom: 4,
+  },
+  monitoringItemDescription: {
+    fontSize: 14,
+    color: "#6B7280",
+    lineHeight: 20,
+  },
+  actionStepsContainer: {
+    marginBottom: 24,
+  },
+  actionStepCard: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 16,
+    backgroundColor: "#fff",
+  },
+  stepNumberBadge: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#16A34A",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  stepNumber: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#fff",
+  },
+  actionStepContent: {
+    flex: 1,
+  },
+  actionStepTitle: {
+    fontSize: 17,
     fontWeight: "700",
     color: "#374151",
     marginBottom: 8,
   },
-  practiceDescription: {
-    fontSize: 14,
+  actionStepDescription: {
+    fontSize: 15,
     color: "#6B7280",
-    lineHeight: 20,
+    lineHeight: 22,
   },
   completeButton: {
     backgroundColor: "#16A34A",

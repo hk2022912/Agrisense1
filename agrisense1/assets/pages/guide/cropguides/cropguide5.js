@@ -1,3 +1,5 @@
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
+
 "use client"
 
 import { useState } from "react"
@@ -12,7 +14,6 @@ import {
   Animated,
   Modal,
 } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 
 // Translation data for comprehensive soil guide
@@ -22,12 +23,12 @@ const TRANSLATIONS = {
     progressTitle: "Your Progress",
     complete: "Complete",
     steps: [
-      { title: "Why Soil Preparation Matters", emoji: "🌱" },
-      { title: "Understanding Soil Types", emoji: "🏔️" },
-      { title: "pH and Nutrient Testing", emoji: "🧪" },
-      { title: "Soil Preparation Steps", emoji: "🛠️" },
-      { title: "Soil Health & Living Things", emoji: "🐛" },
-      { title: "Action Steps for Beginners", emoji: "✅" },
+      { title: "Why Soil Preparation Matters", icon: { name: "leaf-outline", library: "Ionicons" } },
+      { title: "Understanding Soil Types", icon: { name: "terrain", library: "MaterialCommunityIcons" } },
+      { title: "pH and Nutrient Testing", icon: { name: "test-tube", library: "MaterialCommunityIcons" } },
+      { title: "Soil Preparation Steps", icon: { name: "hammer-outline", library: "Ionicons" } },
+      { title: "Soil Health & Living Things", icon: { name: "bug-outline", library: "MaterialCommunityIcons" } },
+      { title: "Beginner’s Action Steps", icon: { name: "checkbox-outline", library: "Ionicons" } },
     ],
     stepContent: {
       whyMatters: {
@@ -142,10 +143,10 @@ const TRANSLATIONS = {
         unReportTitle: "UN Report Finding:",
         unReportText: "The UN reported that adding just 2% more organic matter can improve water holding by 25%.",
         soilLife: [
-          { organism: "Earthworms", role: "Improve soil structure and aeration", icon: "🪱" },
-          { organism: "Beneficial Bacteria", role: "Fix nitrogen and break down organic matter", icon: "🦠" },
-          { organism: "Mycorrhizal Fungi", role: "Help plants absorb nutrients and water", icon: "🍄" },
-          { organism: "Beneficial Insects", role: "Control pests and pollinate plants", icon: "🐛" },
+          { organism: "Earthworms", role: "Improve soil structure and aeration", icon: { name: "shield-bug-outline", library: "MaterialCommunityIcons" } },
+          { organism: "Beneficial Bacteria", role: "Fix nitrogen and break down organic matter", icon: { name: "bacteria-outline", library: "MaterialCommunityIcons" } },
+          { organism: "Mycorrhizal Fungi", role: "Help plants absorb nutrients and water", icon: { name: "mushroom-outline", library: "MaterialCommunityIcons" } },
+          { organism: "Beneficial Insects", role: "Control pests and pollinate plants", icon: { name: "butterfly", library: "MaterialCommunityIcons" } },
         ],
         source: "Source: UNCCD Global Land Outlook Soil Report (2022–2024)",
         button: "See Action Steps",
@@ -180,12 +181,12 @@ const TRANSLATIONS = {
     progressTitle: "Inyong Progreso",
     complete: "Tapos na",
     steps: [
-      { title: "Bakit Mahalaga ang Paghahanda", emoji: "🌱" },
-      { title: "Mga Uri ng Lupa", emoji: "🏔️" },
-      { title: "pH at Pagsubok ng Nutrients", emoji: "🧪" },
-      { title: "Mga Hakbang sa Paghahanda", emoji: "🛠️" },
-      { title: "Kalusugan ng Lupa", emoji: "🐛" },
-      { title: "Mga Hakbang para sa Nagsisimula", emoji: "✅" },
+      { title: "Bakit Mahalaga ang Paghahanda", icon: { name: "leaf-outline", library: "Ionicons" } },
+      { title: "Pagkilala sa mga Uri ng Lupa", icon: { name: "terrain", library: "MaterialCommunityIcons" } },
+      { title: "pH at Pagsubok ng Nutrients", icon: { name: "test-tube", library: "MaterialCommunityIcons" } },
+      { title: "Mga Hakbang sa Paghahanda", icon: { name: "hammer-outline", library: "Ionicons" } },
+      { title: "Kalusugan ng Lupa", icon: { name: "bug-outline", library: "MaterialCommunityIcons" } },
+      { title: "Mga Hakbang para sa Nagsisimula", icon: { name: "checkbox-outline", library: "Ionicons" } },
     ],
     stepContent: {
       whyMatters: {
@@ -245,7 +246,7 @@ const TRANSLATIONS = {
             bgColor: "#F4E4BC",
           },
         ],
-        jarTestTitle: "💡 Tip: Jar Test",
+        jarTestTitle: "Tip: Jar Test",
         jarTestText:
           "Maaari ninyong subukan ang jar test sa bahay para suriin ang uri ng inyong lupa sa pamamagitan ng paghalo ng lupa at tubig sa jar at pagbabantay kung paano ito mag-settle.",
         source: "Source: USDA Soil Survey Manual (2022)",
@@ -330,17 +331,17 @@ const TRANSLATIONS = {
         unReportText:
           "Ang UN ay nag-report na ang pagdagdag ng 2% pa lang na organic matter ay maaaring mapabuti ang water holding ng 25%.",
         soilLife: [
-          { organism: "Mga Uod", role: "Pinapabuti ang soil structure at aeration", icon: "🪱" },
-          { organism: "Beneficial Bacteria", role: "Nag-fix ng nitrogen at sinisira ang organic matter", icon: "🦠" },
+          { organism: "Mga Uod", role: "Pinapabuti ang soil structure at aeration", icon: { name: "worm", library: "MaterialCommunityIcons" } },
+          { organism: "Beneficial Bacteria", role: "Nag-fix ng nitrogen at sinisira ang organic matter", icon: { name: "bacteria-outline", library: "MaterialCommunityIcons" } },
           {
             organism: "Mycorrhizal Fungi",
             role: "Tumutulong sa mga halaman na mag-absorb ng nutrients at tubig",
-            icon: "🍄",
+            icon: { name: "mushroom-outline", library: "MaterialCommunityIcons" },
           },
           {
             organism: "Beneficial Insects",
             role: "Kumokontrol sa mga peste at nag-pollinate ng mga halaman",
-            icon: "🐛",
+            icon: { name: "bug-outline", library: "MaterialCommunityIcons" },
           },
         ],
         source: "Source: UNCCD Global Land Outlook Soil Report (2022–2024)",
@@ -380,14 +381,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -674,7 +673,11 @@ export default function ComprehensiveSoilGuide() {
       <View style={styles.soilLifeContainer}>
         {t.stepContent.soilHealth.soilLife.map((organism, index) => (
           <View key={index} style={styles.soilLifeItem}>
-            <Text style={styles.soilLifeIcon}>{organism.icon}</Text>
+            {organism.icon.library === "Ionicons" ? (
+              <Ionicons name={organism.icon.name} size={32} color="#374151" style={styles.soilLifeIcon} />
+            ) : (
+              <MaterialCommunityIcons name={organism.icon.name} size={32} color="#374151" style={styles.soilLifeIcon} />
+            )}
             <View style={styles.soilLifeContent}>
               <Text style={styles.soilLifeOrganism}>{organism.organism}</Text>
               <Text style={styles.soilLifeRole}>{organism.role}</Text>
@@ -857,9 +860,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,
@@ -1317,7 +1317,6 @@ const styles = StyleSheet.create({
     borderColor: "#E5E7EB",
   },
   soilLifeIcon: {
-    fontSize: 32,
     marginRight: 16,
   },
   soilLifeContent: {

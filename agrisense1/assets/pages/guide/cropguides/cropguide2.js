@@ -12,7 +12,7 @@ import {
   Animated,
   Modal,
 } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 
 // Translation data for pest management
@@ -24,10 +24,10 @@ const TRANSLATIONS = {
     nextUp: "Next Up:",
     tapToContinue: "Tap to continue →",
     steps: [
-      { title: "Understanding Integrated Organic Methods", emoji: "🔬" },
-      { title: "Key Strategies", emoji: "🛡️" },
-      { title: "Implementation Plan", emoji: "📋" },
-      { title: "Beginner Action Plan", emoji: "🚀" },
+      { title: "Understanding Integrated Organic Methods", icon: "microscope-outline" },
+      { title: "Core Approaches to Pest Management", icon: "shield-checkmark-outline" },
+      { title: "Simple Steps for Effective Organic Pest Management", icon: "document-text-outline" },
+      { title: "Organic Pest Control for Beginners", icon: "rocket-outline" },
     ],
     strategies: {
       biological: {
@@ -95,13 +95,13 @@ const TRANSLATIONS = {
         button: "Learn Key Strategies",
       },
       strategies: {
-        title: "Key Strategies",
+        title: "Strategic Pest Control Solutions",
         subtitle: "Comprehensive approach to organic pest management",
         description: "Each strategy plays a unique role in creating a balanced pest management system:",
         button: "Ready to Implement",
       },
       implementation: {
-        title: "Implementation Plan",
+        title: "Structured Plan for Organic Pest Solutions",
         subtitle: "Step-by-step approach to organic pest management",
         steps: [
           {
@@ -133,7 +133,7 @@ const TRANSLATIONS = {
         button: "Show Beginner Plan",
       },
       beginnerPlan: {
-        title: "Beginner Action Plan",
+        title: "Beginner’s Step-by-Step Guide",
         subtitle: "Simple steps to start your organic pest management journey",
         steps: [
           {
@@ -181,10 +181,10 @@ const TRANSLATIONS = {
     nextUp: "Susunod:",
     tapToContinue: "Pindutin para magpatuloy →",
     steps: [
-      { title: "Pag-unawa sa Integrated Organic Methods", emoji: "🔬" },
-      { title: "Mga Pangunahing Estratehiya", emoji: "🛡️" },
-      { title: "Plano sa Pagpapatupad", emoji: "📋" },
-      { title: "Plano ng Aksyon para sa Nagsisimula", emoji: "🚀" },
+      { title: "Pag-unawa sa Integrated Organic Methods", icon: "microscope-outline" },
+      { title: "Mga Pangunahing Estratehiya", icon: "shield-checkmark-outline" },
+      { title: "Planong Organiko para Labanan ang mga Peste", icon: "document-text-outline" },
+      { title: "Plano ng Aksyon para sa Nagsisimula", icon: "rocket-outline" },
     ],
     strategies: {
       biological: {
@@ -267,7 +267,7 @@ const TRANSLATIONS = {
         button: "Handa na Magpatupad",
       },
       implementation: {
-        title: "Plano sa Pagpapatupad",
+        title: "Maayos na Plano para sa Likas na Panlaban sa mga Peste",
         subtitle: "Step-by-step na approach sa organic pest management",
         steps: [
           {
@@ -346,12 +346,12 @@ const TRANSLATIONS = {
 
 // Data constants for pest management strategies
 const STRATEGY_GROUPS = {
-  biological: { color: "#16A34A", bgColor: "#DCFCE7", emoji: "🐞" },
-  cultural: { color: "#059669", bgColor: "#A7F3D0", emoji: "🌱" },
-  mechanical: { color: "#DC2626", bgColor: "#FEE2E2", emoji: "🛠️" },
-  biopesticides: { color: "#7C3AED", bgColor: "#EDE9FE", emoji: "🌿" },
-  trapPush: { color: "#EA580C", bgColor: "#FED7AA", emoji: "🌻" },
-  nonPesticidal: { color: "#0891B2", bgColor: "#CFFAFE", emoji: "🎯" },
+  biological: { color: "#16A34A", bgColor: "#DCFCE7", icon: "ladybug" },
+  cultural: { color: "#059669", bgColor: "#A7F3D0", icon: "recycle" },
+  mechanical: { color: "#DC2626", bgColor: "#FEE2E2", icon: "wrench" },
+  biopesticides: { color: "#7C3AED", bgColor: "#EDE9FE", icon: "flower-pollen" },
+  trapPush: { color: "#EA580C", bgColor: "#FED7AA", icon: "bee-flower" },
+  nonPesticidal: { color: "#0891B2", bgColor: "#CFFAFE", icon: "target" },
 }
 
 // Language Toggle Component
@@ -361,14 +361,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -430,7 +428,7 @@ const StrategyCard = ({ strategyKey, strategy, onPress, t, interactive = false }
     activeOpacity={interactive ? 0.7 : 1}
     disabled={!interactive}
   >
-    <Text style={styles.strategyEmoji}>{strategy.emoji}</Text>
+    <MaterialCommunityIcons name={strategy.icon} size={36} color="#374151" style={{ marginRight: 16 }} />
     <View style={styles.strategyInfo}>
       <Text style={styles.strategyName}>{t.strategies[strategyKey].name}</Text>
       <View style={[styles.strategyBadge, { backgroundColor: strategy.color }]}>
@@ -639,7 +637,7 @@ export default function PestManagementGuide() {
               <>
                 <View style={styles.modalHeader}>
                   <View style={styles.modalTitleContainer}>
-                    <Text style={styles.modalEmoji}>{selectedStrategy.emoji}</Text>
+                    <MaterialCommunityIcons name={selectedStrategy.icon} size={28} color="#16A34A" style={{ marginRight: 12 }} />
                     <Text style={styles.modalTitle}>{selectedStrategy.name}</Text>
                   </View>
                   <TouchableOpacity onPress={() => setShowStrategyModal(false)} style={styles.modalCloseButton}>
@@ -759,9 +757,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,
@@ -921,10 +916,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E5E7EB",
   },
-  strategyEmoji: {
-    fontSize: 36,
-    marginRight: 16,
-  },
   strategyInfo: {
     flex: 1,
   },
@@ -1077,10 +1068,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
-  },
-  modalEmoji: {
-    fontSize: 28,
-    marginRight: 12,
   },
   modalTitle: {
     fontSize: 20,

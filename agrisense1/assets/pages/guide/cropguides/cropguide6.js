@@ -27,7 +27,7 @@ const TRANSLATIONS = {
       { title: "Timing and Scheduling", emoji: "⏰" },
       { title: "Soil and Climate Considerations", emoji: "🌡️" },
       { title: "Cost and Maintenance Overview", emoji: "💰" },
-      { title: "Beginner Action Steps", emoji: "🚀" },
+      { title: "Beginner’s Action Steps", emoji: "🚀" },
     ],
     stepContent: {
       whyMatters: {
@@ -238,12 +238,12 @@ const TRANSLATIONS = {
     progressTitle: "Inyong Progreso",
     complete: "Tapos na",
     steps: [
-      { title: "Bakit Mahalaga ang Efficient Irrigation", emoji: "💧" },
-      { title: "Paghahambing ng mga Paraan", emoji: "🚿" },
-      { title: "Timing at Scheduling", emoji: "⏰" },
-      { title: "Lupa at Klima", emoji: "🌡️" },
-      { title: "Gastos at Maintenance", emoji: "💰" },
-      { title: "Mga Hakbang para sa Nagsisimula", emoji: "🚀" },
+      { title: "Bakit Mahalaga ang Efficient Irrigation" },
+      { title: "Paghahambing ng mga Paraan" },
+      { title: "Timing at Scheduling" },
+      { title: "Katangian ng Lupa at Klima" },
+      { title: "Gastos at Maintenance" },
+      { title: "Mga Hakbang para sa Nagsisimula" },
     ],
     stepContent: {
       whyMatters: {
@@ -475,14 +475,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -972,9 +970,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,

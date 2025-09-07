@@ -28,7 +28,7 @@ const TRANSLATIONS = {
       { title: "Signs Your Crop Is Ready", emoji: "🔍" },
       { title: "How to Reduce Harvest Losses", emoji: "📉" },
       { title: "Manual vs Machine Harvesting", emoji: "🚜" },
-      { title: "Beginner Action Plan", emoji: "📋" },
+      { title: "Beginner’s Action Steps", emoji: "📋" },
     ],
     stepContent: {
       importance: {
@@ -216,7 +216,7 @@ const TRANSLATIONS = {
       { title: "Mga Palatandaan na Handa na ang Pananim", emoji: "🔍" },
       { title: "Paano Mabawasan ang Pagkalugi sa Pag-ani", emoji: "📉" },
       { title: "Manual vs Machine na Pag-ani", emoji: "🚜" },
-      { title: "Action Plan para sa Nagsisimula", emoji: "📋" },
+      { title: "Mga Hakbang para sa mga Nagsisimula", emoji: "📋" },
     ],
     stepContent: {
       importance: {
@@ -403,14 +403,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -801,9 +799,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,

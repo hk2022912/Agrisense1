@@ -27,7 +27,7 @@ const TRANSLATIONS = {
       { title: "Assessing Crop-Climate Match", emoji: "📊" },
       { title: "Regional Crop Examples", emoji: "🌍" },
       { title: "Adapting to Climate Challenges", emoji: "🛠️" },
-      { title: "Beginner Action Plan", emoji: "🚀" },
+      { title: "Beginner’s Action Steps", emoji: "🚀" },
     ],
     stepContent: {
       whyMatters: {
@@ -225,7 +225,7 @@ const TRANSLATIONS = {
       { title: "Pag-assess ng Crop-Climate Match", emoji: "📊" },
       { title: "Mga Halimbawa ng Regional Crops", emoji: "🌍" },
       { title: "Pag-adapt sa Climate Challenges", emoji: "🛠️" },
-      { title: "Action Plan para sa Nagsisimula", emoji: "🚀" },
+      { title: "Mga Hakbang para sa mga Nagsisimula", emoji: "🚀" },
     ],
     stepContent: {
       whyMatters: {
@@ -423,14 +423,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -870,9 +868,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,

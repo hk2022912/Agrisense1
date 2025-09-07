@@ -24,11 +24,11 @@ const TRANSLATIONS = {
     nextUp: "Next Up:",
     tapToContinue: "Tap to continue →",
     steps: [
-      { title: "Why Use Companion Planting?", emoji: "🤝" },
-      { title: "Proven Companion Pairings", emoji: "👥" },
-      { title: "Seasonal Strategy", emoji: "📅" },
-      { title: "Monitoring and Adjusting", emoji: "📊" },
-      { title: "Beginner Steps", emoji: "🌱" },
+      { title: "Why Use Companion Planting?" },
+      { title: "Companion Planting Pairings" },
+      { title: "Seasonal Companion Strategy"},
+      { title: "Companion Planting Check-In"},
+      { title: "Steps for Companion Planting for Beginners"},
     ],
     companionPairs: {
       threeSisters: {
@@ -116,14 +116,14 @@ const TRANSLATIONS = {
         button: "Learn Proven Pairings",
       },
       pairings: {
-        title: "Proven Companion Pairings",
+        title: "Reliable Crop Combinations Companion Pairings",
         subtitle: "Time-tested plant combinations - tap on cards to learn more",
         description: "These companion pairings have been proven effective by gardeners and researchers worldwide:",
         tip: "Tip: Intermix herbs and flowers with crops to deter pests and draw pollinators.",
         button: "Plan Seasonal Strategy",
       },
       seasonal: {
-        title: "Seasonal Strategy",
+        title: "Strategic Multi-Year Plant Rotation Using Companions",
         subtitle: "Multi-year companion planting rotation plan",
         description: "Rotate companion plantings annually to maximize benefits and prevent soil depletion:",
         tableTitle: "Multi-Year Plan Example:",
@@ -163,7 +163,7 @@ const TRANSLATIONS = {
         button: "Show Beginner Steps",
       },
       beginnerSteps: {
-        title: "Beginner Steps",
+        title: "Learn the Basics of Growing Plant Partners",
         subtitle: "Simple steps to start your companion planting journey",
         steps: [
           {
@@ -207,11 +207,11 @@ const TRANSLATIONS = {
     nextUp: "Susunod:",
     tapToContinue: "Pindutin para magpatuloy →",
     steps: [
-      { title: "Bakit Gumamit ng Companion Planting?", emoji: "🤝" },
-      { title: "Napatunayang Companion Pairings", emoji: "👥" },
-      { title: "Estratehiya sa Panahon", emoji: "📅" },
-      { title: "Pagbabantay at Pag-aayos", emoji: "📊" },
-      { title: "Mga Hakbang para sa Nagsisimula", emoji: "🌱" },
+      { title: "Bakit Gumamit ng Companion Planting?" },
+      { title: "Napatunayang Companion Pairings" },
+      { title: "Panahonang Estratehiya para sa Kasamang Halaman" },
+      { title: "Pagbabantay at Pag-aayos" },
+      { title: "Mga Hakbang para sa Nagsisimula" },
     ],
     companionPairs: {
       threeSisters: {
@@ -409,14 +409,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -839,9 +837,7 @@ const styles = StyleSheet.create({
   activeLanguageButtonText: {
     color: "#fff",
   },
-  flagEmoji: {
-    fontSize: 10,
-  },
+
   scrollView: {
     flex: 1,
   },

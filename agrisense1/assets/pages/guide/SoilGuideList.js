@@ -20,18 +20,69 @@ export default function SoilGuideList() {
   const handleGoBack = () => navigation.goBack();
   const handleNavigate = (screen) => navigation.navigate(screen);
 
-  const guides = [
-    { id: 1, title: 'Basic Soil Guide', desc: 'A Soil guide for Farmers', img: require('../../images/soil_basic.png') },
-    { id: 2, title: 'Soil Guide 2', desc: 'Placeholder for Soil Guide 2', img: require('../../images/soil_fertility.png') },
-    { id: 3, title: 'Soil Guide 3', desc: 'Placeholder for Soil Guide 3', img: require('../../images/soil_erosion.png') },
-    { id: 4, title: 'Soil Guide 4', desc: 'Placeholder for Soil Guide 4', img: require('../../images/soil_basic.png') },
-    { id: 5, title: 'Soil Guide 5', desc: 'Placeholder for Soil Guide 5', img: require('../../images/soil_fertility.png') },
-    { id: 6, title: 'Soil Guide 6', desc: 'Placeholder for Soil Guide 6', img: require('../../images/soil_erosion.png') },
-    { id: 7, title: 'Soil Guide 7', desc: 'Placeholder for Soil Guide 7', img: require('../../images/soil_basic.png') },
-    { id: 8, title: 'Soil Guide 8', desc: 'Placeholder for Soil Guide 8', img: require('../../images/soil_fertility.png') },
-    { id: 9, title: 'Soil Guide 9', desc: 'Placeholder for Soil Guide 9', img: require('../../images/soil_erosion.png') },
-    { id: 10, title: 'Soil Guide 10', desc: 'Placeholder for Soil Guide 10', img: require('../../images/soil_basic.png') },
-  ];
+const guides = [
+  {
+    id: 1,
+    title: 'Complete Fertilizer Guide',
+    desc: 'Learn about organic, inorganic, and integrated fertilizers for better soil and crop health.',
+    img: require('../../images/soil_basic.png')
+  },
+  {
+    id: 2,
+    title: 'Soil Fertility Guide',
+    desc: 'A guide to assessing and enhancing soil fertility through nutrient management and organic amendments.',
+    img: require('../../images/soil_fertility.png')
+  },
+  {
+    id: 3,
+    title: 'Soil Erosion Prevention Guide',
+    desc: 'Effective strategies like contour plowing and vegetative cover to prevent soil erosion.',
+    img: require('../../images/soil_erosion.png')
+  },
+  {
+    id: 4,
+    title: 'Cover Crops Guide',
+    desc: 'Learn how cover crops improve soil health, suppress weeds, and control erosion.',
+    img: require('../../images/soil_basic.png')
+  },
+  {
+    id: 5,
+    title: 'Composting Guide',
+    desc: 'A step-by-step guide to creating compost to enrich soil with organic matter.',
+    img: require('../../images/soil_fertility.png')
+  },
+  {
+    id: 6,
+    title: 'Crop Rotation Guide',
+    desc: 'Principles of crop rotation to maintain soil health and improve crop yields.',
+    img: require('../../images/soil_erosion.png')
+  },
+  {
+    id: 7,
+    title: 'Mulching Guide',
+    desc: 'Using mulching to conserve soil moisture, regulate temperature, and suppress weeds.',
+    img: require('../../images/soil_basic.png')
+  },
+  {
+    id: 8,
+    title: 'Vermicomposting Guide',
+    desc: 'A guide to using worms for creating nutrient-rich compost for soil improvement.',
+    img: require('../../images/soil_fertility.png')
+  },
+  {
+    id: 9,
+    title: 'Soil Testing Guide',
+    desc: 'Learn soil testing to analyze nutrient levels and pH for better farming decisions.',
+    img: require('../../images/soil_erosion.png')
+  },
+  {
+    id: 10,
+    title: 'Dry Season Cropping Tips',
+    desc: 'Tips for choosing crops and saving water during the dry season.',
+    img: require('../../images/soil_basic.png')
+  }
+];
+
 
   return (
     <SafeAreaView style={styles.container}>

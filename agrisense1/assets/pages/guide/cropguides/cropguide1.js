@@ -12,10 +12,10 @@ import {
   Animated,
   Modal,
 } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 
-// Updated Translation data with your new content
+// Updated Translation data with MaterialCommunityIcons
 const TRANSLATIONS = {
   en: {
     headerTitle: "Crop Rotation Planning",
@@ -24,12 +24,12 @@ const TRANSLATIONS = {
     nextUp: "Next Up:",
     tapToContinue: "Tap to continue →",
     steps: [
-      { title: "Why Crop Rotation Is Important", emoji: "🌱" },
-      { title: "What Crop Rotation Does", emoji: "🔄" },
-      { title: "How to Make a Rotation Plan", emoji: "📋" },
-      { title: "Plan for Many Seasons", emoji: "📅" },
-      { title: "Check and Change as Needed", emoji: "📊" },
-      { title: "Easy First Steps for Beginners", emoji: "✅" },
+      { title: "Why Crop Rotation Is Important", icon: "sprout" },
+      { title: "What Crop Rotation Does", icon: "rotate-3d-variant" },
+      { title: "How to Make a Rotation Plan", icon: "clipboard-text-outline" },
+      { title: "Plan for Many Seasons", icon: "calendar" },
+      { title: "Check and Change as Needed", icon: "chart-line" },
+      { title: "Beginner’s Action Steps", icon: "checkbox-marked-circle-outline" },
     ],
     cropGroups: {
       legumes: {
@@ -194,12 +194,12 @@ const TRANSLATIONS = {
     nextUp: "Susunod:",
     tapToContinue: "Pindutin para magpatuloy →",
     steps: [
-      { title: "Bakit Mahalaga ang Pag-ikot ng Pananim", emoji: "🌱" },
-      { title: "Ano ang Ginagawa ng Pag-ikot ng Pananim", emoji: "🔄" },
-      { title: "Paano Gumawa ng Plano sa Pag-ikot", emoji: "📋" },
-      { title: "Pagpaplano para sa Maraming Panahon", emoji: "📅" },
-      { title: "Suriin at Baguhin Kung Kailangan", emoji: "📊" },
-      { title: "Madaling Unang Hakbang para sa mga Nagsisimula", emoji: "✅" },
+      { title: "Bakit Mahalaga ang Pag-ikot ng Pananim", icon: "sprout" },
+      { title: "Ano ang Ginagawa ng Pag-ikot ng Pananim", icon: "rotate-3d-variant" },
+      { title: "Paano Gumawa ng Plano sa Pag-ikot", icon: "clipboard-text-outline" },
+      { title: "Pagpaplano para sa Maraming Panahon", icon: "calendar" },
+      { title: "Suriin at Baguhin Kung Kailangan", icon: "chart-line" },
+      { title: "Mga Hakbang para sa mga Nagsisimula", icon: "checkbox-marked-circle-outline" },
     ],
     cropGroups: {
       legumes: {
@@ -385,13 +385,13 @@ const TRANSLATIONS = {
   },
 }
 
-// Updated Data constants with new crop group
+// Updated Data constants with MaterialCommunityIcons
 const CROP_GROUPS = {
-  legumes: { color: "#16A34A", bgColor: "#DCFCE7", emoji: "🌱" },
-  leafy: { color: "#059669", bgColor: "#A7F3D0", emoji: "🥬" },
-  fruiting: { color: "#DC2626", bgColor: "#FEE2E2", emoji: "🍅" },
-  root: { color: "#EA580C", bgColor: "#FED7AA", emoji: "🥕" },
-  cover: { color: "#7C3AED", bgColor: "#EDE9FE", emoji: "🌾" },
+  legumes: { color: "#16A34A", bgColor: "#DCFCE7", icon: "sprout" },
+  leafy: { color: "#059669", bgColor: "#A7F3D0", icon: "leaf" },
+  fruiting: { color: "#DC2626", bgColor: "#FEE2E2", icon: "chili-mild" },
+  root: { color: "#EA580C", bgColor: "#FED7AA", icon: "carrot" },
+  cover: { color: "#7C3AED", bgColor: "#EDE9FE", icon: "barley" },
 }
 
 const ROTATION_PLAN = [
@@ -408,14 +408,12 @@ const LanguageToggle = ({ currentLanguage, onLanguageChange }) => (
       style={[styles.languageButton, currentLanguage === "en" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("en")}
     >
-      <Text style={styles.flagEmoji}>🇺🇸</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "en" && styles.activeLanguageButtonText]}>EN</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.languageButton, currentLanguage === "tl" && styles.activeLanguageButton]}
       onPress={() => onLanguageChange("tl")}
     >
-      <Text style={styles.flagEmoji}>🇵🇭</Text>
       <Text style={[styles.languageButtonText, currentLanguage === "tl" && styles.activeLanguageButtonText]}>TL</Text>
     </TouchableOpacity>
   </View>
@@ -452,7 +450,7 @@ const StepNavigation = ({ steps, currentStep, completedSteps, onStepPress }) => 
           onPress={() => onStepPress(index)}
         >
           {completedSteps.includes(index) && (
-            <Ionicons name="checkmark-circle" size={16} color="#16A34A" style={{ marginRight: 4 }} />
+            <MaterialCommunityIcons name="check-circle" size={16} color="#16A34A" style={{ marginRight: 4 }} />
           )}
           <Text
             style={[
@@ -477,7 +475,7 @@ const CropGroupCard = ({ groupKey, group, onPress, t, interactive = false }) => 
     activeOpacity={interactive ? 0.7 : 1}
     disabled={!interactive}
   >
-    <Text style={styles.cropGroupEmoji}>{group.emoji}</Text>
+    <MaterialCommunityIcons name={group.icon} size={36} color="#374151" style={{ marginRight: 16 }} />
     <View style={styles.cropGroupInfo}>
       <Text style={styles.cropGroupName}>{t.cropGroups[groupKey].name}</Text>
       <View style={[styles.cropGroupBadge, { backgroundColor: group.color }]}>
@@ -487,14 +485,14 @@ const CropGroupCard = ({ groupKey, group, onPress, t, interactive = false }) => 
         {t.modal.examples} {t.cropGroups[groupKey].examples.join(", ")}
       </Text>
     </View>
-    {interactive && <Ionicons name="chevron-forward" size={20} color={group.color} />}
+    {interactive && <MaterialCommunityIcons name="chevron-right" size={20} color={group.color} />}
   </TouchableOpacity>
 )
 
 const CompleteButton = ({ onPress, children, isLoading = false }) => (
   <TouchableOpacity style={styles.completeButton} onPress={onPress} disabled={isLoading} activeOpacity={0.8}>
     <Text style={styles.completeButtonText}>{children}</Text>
-    <Ionicons name="chevron-forward" size={20} color="#fff" />
+    <MaterialCommunityIcons name="chevron-right" size={20} color="#fff" />
   </TouchableOpacity>
 )
 
@@ -552,7 +550,7 @@ export default function EnhancedCropGuide() {
       <View style={styles.benefitsCard}>
         {t.stepContent.whyImportant.benefits.map((benefit, index) => (
           <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#16A34A" />
+            <MaterialCommunityIcons name="check-circle" size={18} color="#16A34A" />
             <Text style={styles.benefitText}>{benefit}</Text>
           </View>
         ))}
@@ -580,7 +578,7 @@ export default function EnhancedCropGuide() {
       <View style={styles.benefitsCard}>
         {t.stepContent.whatItDoes.soilBenefits.map((benefit, index) => (
           <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#16A34A" />
+            <MaterialCommunityIcons name="check-circle" size={18} color="#16A34A" />
             <Text style={styles.benefitText}>{benefit}</Text>
           </View>
         ))}
@@ -592,7 +590,7 @@ export default function EnhancedCropGuide() {
       <View style={styles.benefitsCard}>
         {t.stepContent.whatItDoes.yieldsBenefits.map((benefit, index) => (
           <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#0891B2" />
+            <MaterialCommunityIcons name="check-circle" size={18} color="#0891B2" />
             <Text style={styles.benefitText}>{benefit}</Text>
           </View>
         ))}
@@ -624,7 +622,7 @@ export default function EnhancedCropGuide() {
       </View>
 
       <View style={styles.tipCard}>
-        <Ionicons name="bulb-outline" size={24} color="#D97706" />
+        <MaterialCommunityIcons name="lightbulb-outline" size={24} color="#D97706" />
         <View style={styles.tipContent}>
           <Text style={styles.tipTitle}>{t.stepContent.howToPlan.tipTitle}</Text>
           <Text style={styles.tipText}>{t.stepContent.howToPlan.tipText}</Text>
@@ -665,7 +663,7 @@ export default function EnhancedCropGuide() {
               const groupTranslation = t.cropGroups[cropType]
               return (
                 <View key={plotIndex} style={[styles.plotCell, { backgroundColor: group.bgColor }]}>
-                  <Text style={styles.plotEmoji}>{group.emoji}</Text>
+                  <MaterialCommunityIcons name={group.icon} size={18} color="#374151" style={{ marginBottom: 4 }} />
                   <Text style={styles.plotName}>{groupTranslation.name}</Text>
                 </View>
               )
@@ -678,7 +676,7 @@ export default function EnhancedCropGuide() {
         <Text style={styles.sectionTitle}>{t.stepContent.planSeasons.benefitsTitle}</Text>
         {t.stepContent.planSeasons.benefits.map((benefit, index) => (
           <View key={index} style={styles.benefitItem}>
-            <Ionicons name="checkmark-circle" size={18} color="#16A34A" />
+            <MaterialCommunityIcons name="check-circle" size={18} color="#16A34A" />
             <Text style={styles.benefitText}>{benefit}</Text>
           </View>
         ))}
@@ -699,8 +697,8 @@ export default function EnhancedCropGuide() {
         {t.stepContent.checkAndChange.aspects.map((aspect, index) => (
           <View key={index} style={styles.monitoringItem}>
             <View style={styles.monitoringIconContainer}>
-              <Ionicons
-                name={["eye-outline", "flask-outline", "rainy-outline", "warning-outline"][index]}
+              <MaterialCommunityIcons
+                name={["eye-outline", "flask-outline", "weather-rainy", "alert-outline"][index]}
                 size={20}
                 color="#16A34A"
               />
@@ -764,7 +762,7 @@ export default function EnhancedCropGuide() {
 
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <MaterialCommunityIcons name="arrow-left" size={20} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{t.headerTitle}</Text>
         <LanguageToggle currentLanguage={language} onLanguageChange={setLanguage} />
@@ -794,11 +792,11 @@ export default function EnhancedCropGuide() {
               <>
                 <View style={styles.modalHeader}>
                   <View style={styles.modalTitleContainer}>
-                    <Text style={styles.modalEmoji}>{selectedCropGroup.emoji}</Text>
+                    <MaterialCommunityIcons name={selectedCropGroup.icon} size={28} color="#16A34A" style={{ marginRight: 12 }} />
                     <Text style={styles.modalTitle}>{selectedCropGroup.name}</Text>
                   </View>
                   <TouchableOpacity onPress={() => setShowCropModal(false)} style={styles.modalCloseButton}>
-                    <Ionicons name="close" size={24} color="#6B7280" />
+                    <MaterialCommunityIcons name="close" size={24} color="#6B7280" />
                   </TouchableOpacity>
                 </View>
                 <View style={[styles.modalBadge, { backgroundColor: selectedCropGroup.color }]}>
@@ -810,7 +808,7 @@ export default function EnhancedCropGuide() {
                 <Text style={styles.modalSectionTitle}>{t.modal.benefits}</Text>
                 {selectedCropGroup.benefits.map((benefit, index) => (
                   <View key={index} style={styles.modalBenefitItem}>
-                    <Ionicons name="checkmark-circle" size={16} color="#16A34A" />
+                    <MaterialCommunityIcons name="check-circle" size={16} color="#16A34A" />
                     <Text style={styles.modalBenefitText}>{benefit}</Text>
                   </View>
                 ))}
@@ -840,7 +838,7 @@ export default function EnhancedCropGuide() {
               activeOpacity={0.8}
             >
               <Text style={styles.completionButtonText}>{t.modal.completionButton}</Text>
-              <Ionicons name="checkmark" size={20} color="#fff" style={{ marginLeft: 8 }} />
+              <MaterialCommunityIcons name="check" size={20} color="#fff" style={{ marginLeft: 8 }} />
             </TouchableOpacity>
           </View>
         </View>
@@ -914,9 +912,6 @@ const styles = StyleSheet.create({
   },
   activeLanguageButtonText: {
     color: "#fff",
-  },
-  flagEmoji: {
-    fontSize: 10,
   },
   scrollView: {
     flex: 1,
@@ -1107,10 +1102,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E5E7EB",
   },
-  cropGroupEmoji: {
-    fontSize: 36,
-    marginRight: 16,
-  },
   cropGroupInfo: {
     flex: 1,
   },
@@ -1216,10 +1207,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#E5E7EB",
-  },
-  plotEmoji: {
-    fontSize: 18,
-    marginBottom: 4,
   },
   plotName: {
     fontSize: 11,
@@ -1361,10 +1348,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
-  },
-  modalEmoji: {
-    fontSize: 28,
-    marginRight: 12,
   },
   modalTitle: {
     fontSize: 20,
